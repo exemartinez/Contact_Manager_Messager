@@ -3,4 +3,13 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('home.html', name=name)
+    '''Establishes the app entry point.'''
+    return render_template("home.html")
+
+@app.route('/message')
+def message():
+    '''Sets up a message and selects the recipes.'''
+    return render_template("message.html")
+
+if __name__ == "__main__":
+    app.run()

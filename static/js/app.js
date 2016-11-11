@@ -1,10 +1,10 @@
-var linkeddynMsgsApp = angular.module('linkeddynMsgsApp', []);
+var CMMessagerApp = angular.module('CMMessagerApp', []);
 
 
 /**
 Controllers
 */
-linkeddynMsgsApp.controller('SendController', ['$scope','linkeddinAPIDelegate', function($scope, linkeddinAPIDelegate) {
+CMMessagerApp.controller('SendController', ['$scope','CMMessagerAPIDelegate', function($scope, CMMessagerAPIDelegate) {
   self = this;
 
   this.listInboxOpen=false;
@@ -27,14 +27,14 @@ linkeddynMsgsApp.controller('SendController', ['$scope','linkeddinAPIDelegate', 
     this.message.attachedFile = $("#fileAttachment").val();
 
     //adding the file to form data TODO refactor this, to make it compatible with older browsers.
-    linkeddinAPIDelegate.sendMessage(this.message);
+    CMMessagerAPIDelegate.sendMessage(this.message);
 
   };
 
 }]);
 
 // This inbox controller allows the management of the receivers on screen and by AJAX, this is core functionality.
-linkeddynMsgsApp.controller("InboxCtrl", ["$scope", "linkeddinAPIDelegate", function($scope, linkeddinAPIDelegate) {
+CMMessagerApp.controller("InboxCtrl", ["$scope", "CMMessagerAPIDelegate", function($scope, CMMessagerAPIDelegate) {
 
   self = this;
 
@@ -43,7 +43,7 @@ linkeddynMsgsApp.controller("InboxCtrl", ["$scope", "linkeddinAPIDelegate", func
 
   // Here goes the call to the service that will, eventually, connect with the LinkedIn API.
   this.loadInboxOptions = function() {
-    this.inboxes = linkeddinAPIDelegate.getContacts();
+    this.inboxes = CMMessagerAPIDelegate.getContacts();
   };
 
   //this makes the functionality for the checks and the unchecks of different inboxes.
@@ -93,7 +93,7 @@ linkeddynMsgsApp.controller("InboxCtrl", ["$scope", "linkeddinAPIDelegate", func
 Configuration
 **/
 
-linkeddynMsgsApp.config(function($sceDelegateProvider) {
+CMMessagerApp.config(function($sceDelegateProvider) {
   $sceDelegateProvider.resourceUrlWhitelist([
     // Allow same origin resource loads.
     'self',
@@ -108,7 +108,7 @@ Directives
 */
 
 
-linkeddynMsgsApp.directive("inboxSelection",  function(){
+CMMessagerApp.directive("inboxSelection",  function(){
 
     //templateURL = "http://linkeddyn-messenger.azurewebsites.net/inboxSelection.html";
     templateURL = "./inboxSelection.html";
@@ -130,7 +130,7 @@ linkeddynMsgsApp.directive("inboxSelection",  function(){
 SERVICES
 ***/
 
-linkeddynMsgsApp.factory('formDataObject', function() {
+CMMessagerApp.factory('formDataObject', function() {
     return function(data) {
         var fd = new FormData();
         angular.forEach(data, function(value, key) {
@@ -140,12 +140,12 @@ linkeddynMsgsApp.factory('formDataObject', function() {
     };
 });
 
-linkeddynMsgsApp.factory("linkeddinAPIDelegate", ["$http", "$httpParamSerializer", "Base64", function($http, $httpParamSerializer, Base64){
+CMMessagerApp.factory("CMMessagerAPIDelegate", ["$http", "$httpParamSerializer", "Base64", function($http, $httpParamSerializer, Base64){
 
-  var linkeddinAPIDelegate = {};
+  var CMMessagerAPIDelegate = {};
 
   //This returns a collection of functions
-  linkeddinAPIDelegate.getContacts = function(){
+  CMMessagerAPIDelegate.getContacts = function(){
     //TODO Here goes the linkedin Magic
     return  [
         {
@@ -182,7 +182,7 @@ linkeddynMsgsApp.factory("linkeddinAPIDelegate", ["$http", "$httpParamSerializer
   };
 
   //Sends the messages to linkedin's users
-  linkeddinAPIDelegate.sendMessage = function (message){
+  CMMessagerAPIDelegate.sendMessage = function (message){
     var msg = "";
 
     console.log(JSON.stringify(message));
@@ -238,13 +238,13 @@ linkeddynMsgsApp.factory("linkeddinAPIDelegate", ["$http", "$httpParamSerializer
 
   };
 
-  return linkeddinAPIDelegate;
+  return CMMessagerAPIDelegate;
 }]);
 
 /**
 The service for conversion of the credentials
 */
-linkeddynMsgsApp.factory('Base64', function () {
+CMMessagerApp.factory('Base64', function () {
 
   /* jshint ignore:start */
     var keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';

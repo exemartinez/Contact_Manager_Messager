@@ -1,13 +1,13 @@
 {
   "name": "Linked Dyn Messages Dependencies",
-  "homepage": "https://github.com/hernanemartinez/linkeddyn-msgs",
+  "homepage": "https://github.com/hernanemartinez/Contact_Manager_Messager",
   "authors": [
     "hernanezequielmartinez <hernanezequielmartinez@gmail.com>"
   ],
-  "description": "Dependencies for application \"Linked Dyn Messages\"",
-  "main": "linkeddyn-msgs.json",
+  "description": "Dependencies for application \"Contact Manager Messager\"",
+  "main": "contact]_manager_messager.json",
   "moduleType": [],
-  "license": "MIT",
+  "license": "GPLv2",
   "ignore": [
     "**/.*",
     "node_modules",
