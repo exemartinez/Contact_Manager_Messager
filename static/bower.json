@@ -1,0 +1,23 @@
+{
+  "name": "Linked Dyn Messages Dependencies",
+  "homepage": "https://github.com/hernanemartinez/linkeddyn-msgs",
+  "authors": [
+    "hernanezequielmartinez <hernanezequielmartinez@gmail.com>"
+  ],
+  "description": "Dependencies for application \"Linked Dyn Messages\"",
+  "main": "linkeddyn-msgs.json",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.0",
+    "jquery": "^2.2.0",
+    "bootstrap": "^3.3.6"
+  }
+}
