@@ -111,7 +111,7 @@ Directives
 CMMessagerApp.directive("inboxSelection",  function(){
 
     //templateURL = "http://linkeddyn-messenger.azurewebsites.net/inboxSelection.html";
-    templateURL = "./inboxSelection.html";
+    templateURL = "../static/inboxSelection.html";
     //$sce.trustAsResourceUrl(templateURL);
 
     return {

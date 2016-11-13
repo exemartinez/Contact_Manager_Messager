@@ -11,5 +11,15 @@ def message():
     '''Sets up a message and selects the recipes.'''
     return render_template("message.html")
 
+@app.route('/inboxSelection')
+def inboxSelection():
+    '''Shows the available recipes.'''
+    return render_template("inboxSelection.html")
+
+@app.route('/inboxes')
+def prueba():
+    '''Shows the available recipes.'''
+    return render_template("inboxes.html")
+
 if __name__ == "__main__":
     app.run()
