@@ -1,4 +1,5 @@
 from flask import Flask, render_template, jsonify
+from system import Importer
 
 app = Flask(__name__)
 
@@ -24,18 +25,23 @@ def get_all_contacts():
     resultado = "Completar con la funcionalidad adecuada!"
     return jsonify({'resultado': { \
     'resulta': resultado \
-    }}),200
-    #return jsonify(resultado)
+    }}), 200
 
 @app.route('/api/v1.0/contacts/load/linkedin/<string:dataFile>', methods=['GET'])
 def post_load_linkedin_contacts(dataFile):
+    #TODO: Has to wrte the tests.
     '''Loads a all the database contacts.'''
-    #TODO: Have to implement this method ASAP.
-    resultado = "Completar con la funcionalidad de carga del archivo desde linkedin!" + dataFile
-    return jsonify({'resultado': { \
-    'resulta': resultado \
-    }}), 200
-    #return jsonify(resultado)
+    imp = Importer()
+
+    res = imp.import_Linkedin_Csv_Contacts(str(dataFile))
+
+    if (res):
+        return jsonify({'resultado': res}), 200
+
+    else:
+        return jsonify({'resultado': res}), 501
+
+    return jsonify(resultado)
 
 if __name__ == "__main__":
     app.run()
