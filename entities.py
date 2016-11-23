@@ -1,8 +1,10 @@
 from system import StringCoder
-'''
-The entity of "Contactos" in the database; one instance = one row.
-'''
+
+
 class Contacto():
+    '''
+    The entity of "Contactos" in the database; one instance = one row.
+    '''
 
     nombre = ""
     apellido = ""

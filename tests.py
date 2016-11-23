@@ -1,8 +1,3 @@
-from dao import DAO
-from csv_reader import CSVManager
-from entities import Contacto
-from system import LogMngr, StringCoder
-
 import sys
 import unittest
 import csv
@@ -10,6 +5,7 @@ import chardet
 
 class importTest(unittest.TestCase):
 
+    from system_messenger import StringCoder, Importer, LogMngr
 
     log = LogMngr("Testing")
 
@@ -17,12 +13,16 @@ class importTest(unittest.TestCase):
     csvMng = None
 
     #The filename to be tested - usually a linkedin contacts export cvs file.
-    filename = "./linkedin_connections_export_microsoft_outlook.csv"
+    filename = "./linkedin_connections_export_microsoft_outlook_dummy.csv"
 
     '''
     Test if inserting in the database of a new contact works ok.
     '''
     def test_database_contacto_insert(self):
+
+        from entities import Contacto
+        from system_messenger import StringCoder, Importer, LogMngr
+        from dao import DAO
 
         self.dao = DAO()
         self.csvMng = CSVManager()
@@ -50,16 +50,23 @@ class importTest(unittest.TestCase):
 
         self.dao.close_connection()
 
-    '''
-    It tests if the file string encoding is appropriate to be imported into the database.
-    '''
-    def test_import_linkedin_file_representation(self):
-        scoder = StringCoder()
 
+    def test_import_linkedin_file_representation(self):
+        '''
+        It tests if the file string encoding is appropriate to be imported into the database.
+        '''
+
+        from entities import Contacto
+        from system_messenger import StringCoder, Importer, LogMngr
+        from dao import DAO
+
+        scoder = StringCoder()
+        x = 0
         with open(self.filename, 'rb') as f: #watch it: this file HAS to be a CSV file...
             reader = csv.reader(f)
             try:
                 for row in reader:
+                    x+=1
                     assert type(row[1]) is str
                     self.log.info("String representation: " + \
                         str(chardet.detect(row[1])["encoding"]))
@@ -71,6 +78,20 @@ class importTest(unittest.TestCase):
                 self.log.info("Error: The configured csv file is in a type of string encoding that cannot be decoded.")
 
 
-            self.assertEqual(True, True)
+            self.assertEqual(x > 0, True)
+
+    def test_REST_linkedin_datafile(self):
+        ''' Test the REST WS for data import. '''
+
+        from entities import Contacto
+        from system_messenger import StringCoder, Importer, LogMngr
+        from dao import DAO
+
+        scoder = StringCoder()
+        imp = Importer()
+        result = imp.import_Linkedin_Csv_Contacts(self.filename)
+
+        self.assertEqual(result, True)
+
 if __name__ == '__main__':
     unittest.main()

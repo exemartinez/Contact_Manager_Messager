@@ -1,10 +1,13 @@
 from entities import Contacto
 from system import LogMngr
+
 import logging
 #import unicodecsv as csv
 import csv
 
 class CSVManager():
+
+
 
     logger = logging.getLogger()
 

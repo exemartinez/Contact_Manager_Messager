@@ -1,4 +1,3 @@
-from dao import DAO
 from csv_reader import CSVManager
 from entities import Contacto
 
@@ -64,12 +63,14 @@ class LogMngr():
         self.logger.debug(valor)
 
 class Importer():
-'''
-This class imports contacts into the SQLite database; it manages different data structures.
-'''
+    '''
+    This class imports contacts into the SQLite database; it manages different data structures.
+    '''
+
     def import_Linkedin_Csv_Contacts(dataFile):
         '''Just loads the database with the CSV data obtained from linkedin. It serves their data structure.'''
 
+        from dao import DAO
         log = LogMngr("Importer.import_linkedin_csv_contacts")
 
         if (dataFile!=None):

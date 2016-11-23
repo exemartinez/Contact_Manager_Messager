@@ -1,4 +1,4 @@
-from system import LogMngr
+from system_messenger import LogMngr
 
 import logging
 import locale
@@ -6,7 +6,7 @@ import sqlite3 as sqlite
 #from pysqlite2 import dbapi2 as sqlite
 
 class DAO (object):
-    
+
     SQLITE_CONSTRAINT_UNIQUE = 2067
     SQLITE_CONSTRAINT = 19
     SQLITE_ERROR = 1
@@ -64,10 +64,10 @@ class DAO (object):
 
         return 0 #sqlite OK! yey!
 
-    '''
-    Deletes all the contacto's records with the given tipo.
-    '''
     def exec_delete_tipo_contacto(self, tipo):
+        '''
+        Deletes all the contacto's records with the given tipo.
+        '''
         try:
 
             self.cursor.execute("delete from contactos where tipo=?", (str(tipo),))
