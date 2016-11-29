@@ -341,8 +341,11 @@ class ContactosController():
 		dao = DAO()
 		
 		self.log.info("Openning connections to the database for querying. ")
+		
 		dao.open_connection()
 		contactos = dao.exec_get_all_contactos()
+		
+		self.log.info("Data retrieved. Records:"+str(len(contactos)))
 		
 		for record in contactos:
 			print(record)

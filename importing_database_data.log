@@ -184,3 +184,21 @@
 2016-11-28 22:28:10,613 - Importer.import_linkedin_csv_contacts - INFO - Database connection online.
 2016-11-28 22:28:24,310 - Importer.import_linkedin_csv_contacts - INFO - Database connection closed.
 2016-11-28 22:28:24,344 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-11-29 19:45:44,561 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-11-29 19:46:58,422 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-11-29 19:46:58,422 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-11-29 19:47:39,947 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2016-11-29 19:47:39,947 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2016-11-29 19:47:39,947 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2016-11-29 19:47:39,947 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2016-11-29 19:47:39,947 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2016-11-29 19:47:39,947 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2016-11-29 19:47:39,985 - REST ContactosController - INFO - Data retrieved. Records:1335
+2016-11-29 19:47:39,985 - REST ContactosController - INFO - Data retrieved. Records:1335
+2016-11-29 19:47:39,985 - REST ContactosController - INFO - Data retrieved. Records:1335
+2016-11-29 19:47:39,985 - REST ContactosController - INFO - Data retrieved. Records:1335
+2016-11-29 19:47:39,985 - REST ContactosController - INFO - Data retrieved. Records:1335
+2016-11-29 19:47:39,985 - REST ContactosController - INFO - Data retrieved. Records:1335
+2016-11-29 19:47:54,492 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-11-29 19:47:54,492 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-11-29 19:47:54,492 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.

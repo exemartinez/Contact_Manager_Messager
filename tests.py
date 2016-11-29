@@ -2,7 +2,7 @@ import sys
 import unittest
 import csv
 import chardet
-from backend import StringCoder, Importer, LogMngr, Contacto, DAO, CSVManager
+from backend import StringCoder, ImportController, LogMngr, Contacto, DAO, CSVManager, ContactosController
 
 
 class importTest(unittest.TestCase):
@@ -80,6 +80,13 @@ class importTest(unittest.TestCase):
         result = imp.import_Linkedin_Csv_Contacts(self.filename)
 
         self.assertEqual(result, True)
+        
+    def test_get_all_contactos_REST(self):
+        ''' Test the REST WS for all the contacts retrieval to the frontend. '''
+        contactos = ContactosController()
+        result = contactos.getContactosAll()
+        
+        self.assertGreater(len(result), 0)
 
 if __name__ == '__main__':
     unittest.main()
