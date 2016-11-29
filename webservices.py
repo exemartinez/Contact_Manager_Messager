@@ -18,20 +18,21 @@ def message():
 #**************
 # REST backend
 #**************
-@app.route('/api/v1.0/contacts/all', methods=['GET'])
+@app.route('/api/v1.0/contactos/all', methods=['GET'])
 def get_all_contacts():
     '''Returns all the database contacts.'''
-    #TODO: Have to implement this method ASAP.
-    resultado = "Completar con la funcionalidad adecuada!"
-    return jsonify({'resultado': { \
-    'resulta': resultado \
-    }}), 200
+    #TODO: Have to TEST this method ASAP.
+    contactosctrl = ContactosController()
+    
+    resultado = contactosctrl.getContactosAll()
+    
+    return jsonify({'resultado': resultado}}), 200
 
-@app.route('/api/v1.0/contacts/load/linkedin/<string:dataFile>', methods=['GET'])
+@app.route('/api/v1.0/contactos/load/linkedin/<string:dataFile>', methods=['GET'])
 def post_load_linkedin_contacts(dataFile):
     #TODO: Has to wrte the tests.
     '''Loads a all the database contacts.'''
-    imp = Importer()
+    imp = ImportController()
 
     res = imp.import_Linkedin_Csv_Contacts(str(dataFile))
 

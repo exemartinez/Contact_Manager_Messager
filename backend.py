@@ -68,7 +68,7 @@ class LogMngr():
     def debug(self, valor):
         self.logger.debug(valor)
 
-class Importer():
+class ImportController():
     '''
     This class imports contacts into the SQLite database; it manages different data structures.
     '''
@@ -329,7 +329,26 @@ class DAO (object):
         '''
         self.log.debug("Database offline.")
         self.cursor.close()
-
+        
+class ContactosController():
+	'''Manages the Contactos entity for usage. resolves request with a JSON. It's intended to work as a REST web service. '''
+	
+	log = LogMngr("REST ContactosController")
+	
+	def getContactosAll(self):
+		'''Returns all contactos in database as a JSON'''
+		
+		dao = DAO()
+		
+		self.log.info("Openning connections to the database for querying. ")
+		dao.open_connection()
+		contactos = dao.exec_get_all_contactos()
+		
+		for record in contactos:
+			print(record)
+			
+		return contactos
+	
 class Contacto():
     '''
     The entity of "Contactos" in the database; one instance = one row.
