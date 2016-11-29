@@ -1,14 +1,3 @@
-from csv_reader import CSVManager
-from entities import Contacto
-from system import LogMngr
-from entities import Contacto
-from system_messenger import LogMngr
-from system import StringCoder
-from dao import DAO
-from csv_reader import CSVManager
-from entities import Contacto
-from system import LogMngr
-
 import sys
 import logging
 import locale
@@ -84,10 +73,9 @@ class Importer():
     This class imports contacts into the SQLite database; it manages different data structures.
     '''
 
-    def import_Linkedin_Csv_Contacts(dataFile):
+    def import_Linkedin_Csv_Contacts(self,dataFile):
         '''Just loads the database with the CSV data obtained from linkedin. It serves their data structure.'''
-
-        from dao import DAO
+        
         log = LogMngr("Importer.import_linkedin_csv_contacts")
 
         if (dataFile!=None):
@@ -191,7 +179,7 @@ class CSVManager():
 
         contactos = set()
 
-        with open(file_name , 'rb') as f:
+        with open(file_name , 'rU') as f:
             reader = csv.reader(f)
             try:
                 for row in reader:

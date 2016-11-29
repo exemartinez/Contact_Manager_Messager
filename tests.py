@@ -2,10 +2,10 @@ import sys
 import unittest
 import csv
 import chardet
+from backend import StringCoder, Importer, LogMngr, Contacto, DAO, CSVManager
+
 
 class importTest(unittest.TestCase):
-
-    from system_messenger import StringCoder, Importer, LogMngr
 
     log = LogMngr("Testing")
 
@@ -19,10 +19,6 @@ class importTest(unittest.TestCase):
     Test if inserting in the database of a new contact works ok.
     '''
     def test_database_contacto_insert(self):
-
-        from entities import Contacto
-        from system_messenger import StringCoder, Importer, LogMngr
-        from dao import DAO
 
         self.dao = DAO()
         self.csvMng = CSVManager()
@@ -56,10 +52,6 @@ class importTest(unittest.TestCase):
         It tests if the file string encoding is appropriate to be imported into the database.
         '''
 
-        from entities import Contacto
-        from system_messenger import StringCoder, Importer, LogMngr
-        from dao import DAO
-
         scoder = StringCoder()
         x = 0
         with open(self.filename, 'rb') as f: #watch it: this file HAS to be a CSV file...
@@ -82,10 +74,6 @@ class importTest(unittest.TestCase):
 
     def test_REST_linkedin_datafile(self):
         ''' Test the REST WS for data import. '''
-
-        from entities import Contacto
-        from system_messenger import StringCoder, Importer, LogMngr
-        from dao import DAO
 
         scoder = StringCoder()
         imp = Importer()
