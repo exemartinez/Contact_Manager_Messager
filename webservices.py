@@ -18,6 +18,24 @@ def message():
 #**************
 # REST backend
 #**************
+
+@app.route('/api/v1.0/mailing/send', methods=['POST'])
+def send_mail_to_contacts():
+    '''Returns all the database contacts.'''
+    #TODO: Have to TEST this method ASAP.
+    mailctrl = MessagingController()
+    
+    #TODO has to add the unjsonify of the destinatarios parameter. 
+    
+    #TODO identify how to pass by complex parameters as posts (how to receive them)
+    
+    resultado = mailctrl.send_Massive_Mails_to_Contacts(username, passw, mensaje,remitente, unjsonify(destinatarios), asunto)
+    
+    if(resultado==0):
+        return jsonify({'resultado': resultado}}), 200
+    else:
+        return jsonify({'resultado': 'Error trying to send the mails to the given contacts'}}), 501
+
 @app.route('/api/v1.0/contactos/all', methods=['GET'])
 def get_all_contacts():
     '''Returns all the database contacts.'''

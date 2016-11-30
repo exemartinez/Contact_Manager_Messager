@@ -110,10 +110,37 @@ class ImportController():
             log = None
 
             return False
-
+            
+class MessagingController():
+    '''sends massive messaging throught different types of channels'''
+    
+    log = LogMngr("mailing_controller")
+    mail = MailingManager()
+    
+    def send_Massive_Mails_to_Contacts(self, username, passw, mensaje, remitente, destinatario, asunto):
+        '''receives a set of mail addresses and sends the same mail to everyones of them individually'''
+        
+        try:
+            
+            self.mail.login(username, passw)
+            
+            self.mail.sendMail(mensaje, remitente, destinatario, asunto)
+            
+            self.mail.logout()
+            
+            return 0
+            
+        except:
+            
+            self.log.error("Error: message delivery wasn't possible")
+            
+            return 1
+    
 class MailingManager:
-
-    server = smtplib.SMTP('smtp.gmail.com:587') #TODO Replace this for a parameter extracted from a configuration file or some other thing.
+    '''this handles the entire sending of masdive mails.'''
+    
+    server = smtplib.SMTP('smtp.gmail.com:587') 
+    #TODO Replace this for a parameter extracted from a configuration file or some other thing.
 
     #System controllers: logs and others
     log = LogMngr("mailing_manager")
@@ -152,7 +179,7 @@ class MailingManager:
             log.error("""Error: el mensaje no pudo enviarse.
             Compruebe que sendmail se encuentra instalado en su sistema""")
 
-    def logOout(self):
+    def logout(self):
         '''Logs out from the user mail account'''
         self.server.quit()
 
