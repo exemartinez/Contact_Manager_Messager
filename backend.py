@@ -331,27 +331,40 @@ class DAO (object):
         self.cursor.close()
         
 class ContactosController():
-	'''Manages the Contactos entity for usage. resolves request with a JSON. It's intended to work as a REST web service. '''
-	
-	log = LogMngr("REST ContactosController")
-	
-	def getContactosAll(self):
-		'''Returns all contactos in database as a JSON'''
-		
-		dao = DAO()
-		
-		self.log.info("Openning connections to the database for querying. ")
-		
-		dao.open_connection()
-		contactos = dao.exec_get_all_contactos()
-		
-		self.log.info("Data retrieved. Records:"+str(len(contactos)))
-		
-		for record in contactos:
-			print(record)
-			
-		return contactos
-	
+    '''Manages the Contactos entity for usage. resolves request with a JSON. It's intended to work as a REST web service. '''
+    
+    log = LogMngr("REST ContactosController")
+    
+    def getContactosAll(self):
+        '''Returns all contactos in database as a JSON'''
+        
+        dao = DAO()
+        contactos = set()
+        
+        self.log.info("Openning connections to the database for querying. ")
+        
+        dao.open_connection()
+        results = dao.exec_get_all_contactos()
+        
+        self.log.info("Data retrieved. Records: "+str(len(results)))
+        
+        for record in results:
+        
+            conta = Contacto()
+        
+            conta.setNombre(record[1])
+            conta.setApellido(record[2])
+            conta.setEmail(record[3])
+            conta.setCompania(record[4])
+            conta.setPosicion(record[5])
+            conta.setTipo(record[6])
+        
+            contactos.add(conta)
+        
+            self.log.info("Record processed: " + str(conta[1]) + " " + str(conta[2]))
+        
+            return contactos
+
 class Contacto():
     '''
     The entity of "Contactos" in the database; one instance = one row.

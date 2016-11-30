@@ -76,7 +76,7 @@ class importTest(unittest.TestCase):
         ''' Test the REST WS for data import. '''
 
         scoder = StringCoder()
-        imp = Importer()
+        imp = ImportController()
         result = imp.import_Linkedin_Csv_Contacts(self.filename)
 
         self.assertEqual(result, True)
