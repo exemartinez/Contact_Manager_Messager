@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 from system import Importer
 
 app = Flask(__name__)
@@ -26,8 +26,17 @@ def send_mail_to_contacts():
     mailctrl = MessagingController()
     
     #TODO has to add the unjsonify of the destinatarios parameter. 
+
+    if not request.json or not 'title' in request.json:
+        abort(400)
     
-    #TODO identify how to pass by complex parameters as posts (how to receive them)
+    #parsing post parameters
+    username = request.json['username']
+    passw = request.json['passw']
+    mensaje = request.json['mensaje']
+    remitente = request.json['remitente']
+    destinatarios = request.json['destinatarios']
+    asunto = request.json['asunto']
     
     resultado = mailctrl.send_Massive_Mails_to_Contacts(username, passw, mensaje,remitente, unjsonify(destinatarios), asunto)
     
