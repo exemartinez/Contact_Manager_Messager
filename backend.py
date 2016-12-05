@@ -75,7 +75,7 @@ class ImportController():
 
     def import_Linkedin_Csv_Contacts(self,dataFile):
         '''Just loads the database with the CSV data obtained from linkedin. It serves their data structure.'''
-        
+
         log = LogMngr("Importer.import_linkedin_csv_contacts")
 
         if (dataFile!=None):
@@ -110,36 +110,11 @@ class ImportController():
             log = None
 
             return False
-            
-class MessagingController():
-    '''sends massive messaging throught different types of channels'''
-    
-    log = LogMngr("mailing_controller")
-    mail = MailingManager()
-    
-    def send_Massive_Mails_to_Contacts(self, username, passw, mensaje, remitente, destinatario, asunto):
-        '''receives a set of mail addresses and sends the same mail to everyones of them individually'''
-        
-        try:
-            
-            self.mail.login(username, passw)
-            
-            self.mail.sendMail(mensaje, remitente, destinatario, asunto)
-            
-            self.mail.logout()
-            
-            return 0
-            
-        except:
-            
-            self.log.error("Error: message delivery wasn't possible")
-            
-            return 1
-    
+
 class MailingManager:
     '''this handles the entire sending of masdive mails.'''
-    
-    server = smtplib.SMTP('smtp.gmail.com:587') 
+
+    server = smtplib.SMTP('smtp.gmail.com:587')
     #TODO Replace this for a parameter extracted from a configuration file or some other thing.
 
     #System controllers: logs and others
@@ -356,40 +331,40 @@ class DAO (object):
         '''
         self.log.debug("Database offline.")
         self.cursor.close()
-        
+
 class ContactosController():
     '''Manages the Contactos entity for usage. resolves request with a JSON. It's intended to work as a REST web service. '''
-    
+
     log = LogMngr("REST ContactosController")
-    
+
     def getContactosAll(self):
         '''Returns all contactos in database as a JSON'''
-        
+
         dao = DAO()
         contactos = set()
-        
+
         self.log.info("Openning connections to the database for querying. ")
-        
+
         dao.open_connection()
         results = dao.exec_get_all_contactos()
-        
+
         self.log.info("Data retrieved. Records: "+str(len(results)))
-        
+
         for record in results:
-        
+
             conta = Contacto()
-        
+
             conta.setNombre(record[1])
             conta.setApellido(record[2])
             conta.setEmail(record[3])
             conta.setCompania(record[4])
             conta.setPosicion(record[5])
             conta.setTipo(record[6])
-        
+
             contactos.add(conta)
-        
+
             self.log.info("Record processed: " + str(conta[1]) + " " + str(conta[2]))
-        
+
             return contactos
 
 class Contacto():
@@ -436,6 +411,31 @@ class Contacto():
         return self.tipo
     def setTipo(self, valor):
         self.tipo = self.scoder.encode(str(valor))
+
+class MessagingController():
+    '''sends massive messaging throught different types of channels'''
+
+    log = LogMngr("mailing_controller")
+    mail = MailingManager()
+
+    def send_Massive_Mails_to_Contacts(self, username, passw, mensaje, remitente, destinatario, asunto):
+        '''receives a set of mail addresses and sends the same mail to everyones of them individually'''
+
+        try:
+
+            self.mail.login(username, passw)
+
+            self.mail.sendMail(mensaje, remitente, destinatario, asunto)
+
+            self.mail.logout()
+
+            return 0
+
+        except:
+
+            self.log.error("Error: message delivery wasn't possible")
+
+            return 1
 
 '''
 This imports the CSV into the SQLite database.
