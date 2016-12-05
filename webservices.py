@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, json
 from backend import ImportController, ContactosController, MessagingController, LogMngr
 
 app = Flask(__name__)
@@ -28,8 +28,6 @@ def send_mail_to_contacts():
     #TODO: Have to TEST this method ASAP.
     mailctrl = MessagingController()
 
-    #TODO has to add the unjsonify of the destinatarios parameter.
-
     if not request.json or not 'username' in request.json:
         return jsonify({'resultado': 'Bad parameters or JSON structure'}), 400
 
@@ -38,12 +36,12 @@ def send_mail_to_contacts():
     passw = request.json['passw']
     mensaje = request.json['mensaje']
     remitente = request.json['remitente']
-    destinatarios = request.json['destinatarios']
+    destinatarios = request.json['destinatarios'] #it comes as a list and is inmediatly transformed: access it by "destinatarios[x]"
     asunto = request.json['asunto']
 
     log.info("The values received were:" + request.json['username'])
 
-    resultado = mailctrl.send_Massive_Mails_to_Contacts(username, passw, mensaje,remitente, unjsonify(destinatarios), asunto)
+    resultado = mailctrl.send_Massive_Mails_to_Contacts(username, passw, mensaje,remitente, destinatarios, asunto)
 
     if(resultado==0):
         return jsonify({'resultado': resultado}), 200

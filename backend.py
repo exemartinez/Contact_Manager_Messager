@@ -415,18 +415,26 @@ class Contacto():
 class MessagingController():
     '''sends massive messaging throught different types of channels'''
 
-    log = LogMngr("mailing_controller")
+    log = LogMngr("messaging_controller")
     mail = MailingManager()
 
-    def send_Massive_Mails_to_Contacts(self, username, passw, mensaje, remitente, destinatario, asunto):
+    def send_Massive_Mails_to_Contacts(self, username, passw, mensaje, remitente, destinatarios, asunto):
         '''receives a set of mail addresses and sends the same mail to everyones of them individually'''
 
         try:
 
+            self.log.info("Logging into the mail server...")
             self.mail.login(username, passw)
 
-            self.mail.sendMail(mensaje, remitente, destinatario, asunto)
-
+            #This is the core of the app: individual mail sending.
+            for destinatario in destinatarios:
+                try:
+                    self.log.info("Sending the mail for " + str(destinatario))
+                    self.mail.sendMail(mensaje, remitente, destinatario, asunto)
+                except(e):
+                    continue
+    
+            self.log.info("Success! login out.")
             self.mail.logout()
 
             return 0
@@ -434,8 +442,11 @@ class MessagingController():
         except:
 
             self.log.error("Error: message delivery wasn't possible")
+            self.mail.logout()
 
             return 1
+
+
 
 '''
 This imports the CSV into the SQLite database.
