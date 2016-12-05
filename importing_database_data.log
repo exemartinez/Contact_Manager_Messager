@@ -1339,3 +1339,7 @@
 2016-11-30 00:23:50,006 - REST ContactosController - INFO - Openning connections to the database for querying. 
 2016-11-30 00:23:50,028 - REST ContactosController - INFO - Data retrieved. Records: 1335
 2016-11-30 00:23:50,072 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-12-05 14:36:30,061 - web services frontend - INFO - The values received were:yz
+2016-12-05 14:37:20,247 - web services frontend - INFO - The values received were:yz
+2016-12-05 14:37:22,006 - mailing_manager - INFO - Error: el usuario, password o servidor son erroneos.
+2016-12-05 14:37:22,318 - mailing_controller - INFO - Error: message delivery wasn't possible

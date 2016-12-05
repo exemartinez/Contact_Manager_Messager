@@ -25,6 +25,8 @@ def send_mail_to_contacts():
     '''Returns all the database contacts.'''
     #below, curl for testing...(it didn't work yet; gives away a bad request error)
     #curl -i -H "Content-Type: application/json" -X POST -d '{"username":"yz","passw":"xyz","mensaje":"Buen test!","remitente":"Un remitente","destinatarios":"set de destinatarios","asunto":"mail de pruebas"}' http://127.0.0.1:5000/api/v1.0/mailing/send
+    #on windows...
+    #curl -i -H "Content-Type: application/json" -X POST -d "{"""username""":"""yz""","""passw""":"""xyz""","""mensaje""":"""Buen_test!""","""remitente""":"""Un_remitente""","""destinatarios""":"""set_de_destinatarios""","""asunto""":"""mail_de_pruebas"""}" http://127.0.0.1:5000/api/v1.0/mailing/send
     #TODO: Have to TEST this method ASAP.
     mailctrl = MessagingController()
 
@@ -43,7 +45,7 @@ def send_mail_to_contacts():
 
     log.info("The values received were:" + request.json['username'])
 
-    resultado = mailctrl.send_Massive_Mails_to_Contacts(username, passw, mensaje,remitente, unjsonify(destinatarios), asunto)
+    resultado = mailctrl.send_Massive_Mails_to_Contacts(username, passw, mensaje,remitente, destinatarios, asunto)
 
     if(resultado==0):
         return jsonify({'resultado': resultado}), 200
