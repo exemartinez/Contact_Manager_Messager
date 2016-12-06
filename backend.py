@@ -2,14 +2,8 @@ import sys
 import logging
 import locale
 import sqlite3 as sqlite
-#from pysqlite2 import dbapi2 as sqlite
-import logging
-#import unicodecsv as csv
 import csv
 import smtplib
-import sys
-import logging
-import locale
 import chardet
 
 '''
@@ -148,10 +142,10 @@ class MailingManager:
 
             self.server.sendmail(remitente, destinatario, msg)
 
-            log.info( "Correo enviado a " + destinatario + ".")
+            self.log.info( "Correo enviado a " + destinatario + ".")
 
         except:
-            log.error("""Error: el mensaje no pudo enviarse.
+            self.log.error("""Error: el mensaje no pudo enviarse.
             Compruebe que sendmail se encuentra instalado en su sistema""")
 
     def logout(self):
@@ -431,7 +425,10 @@ class MessagingController():
                 try:
                     self.log.info("Sending the mail for " + str(destinatario))
                     self.mail.sendMail(mensaje, remitente, destinatario, asunto)
-                except(e):
+                    
+                except Exception as e:
+                    self.log.error("error for :" + str(destinatario) + " error: " + str(e))
+                    
                     continue
     
             self.log.info("Success! login out.")
@@ -439,9 +436,10 @@ class MessagingController():
 
             return 0
 
-        except:
+        except Exception as e:
 
-            self.log.error("Error: message delivery wasn't possible")
+            self.log.error("Error: message delivery wasn't possible." + " ERROR:" +" error: " + str(e))
+            
             self.mail.logout()
 
             return 1

@@ -100,7 +100,7 @@ class importTest(unittest.TestCase):
         self.app = webservices.app.test_client()
 
         #stablishes the parameters and the value to be returned.
-        res=self.app.post('/api/v1.0/mailing/send', data=json.dumps({"username":"yz","passw":"xyz","mensaje":"Buen test!","remitente":"Un remitente","destinatarios":["prueba@gmail.com","tests@hotmail.com","ultimo@yahoo.com"],"asunto":"mail de pruebas"}),content_type='application/json')
+        res=self.app.post('/api/v1.0/mailing/send', data=json.dumps({"username":"yyy.com","passw":"xxxx","mensaje":"Buen test!","remitente":"Un remitente","destinatarios":["prueba@gmail.com","tests@hotmail.com","ultimo@yahoo.com"],"asunto":"mail de pruebas"}),content_type='application/json')
         self.log.info("Values returned: " + str(res.status) + " - " + str(res.data))
 
         self.assertNotIn("<title>400 Bad Request</title>", str(res.data))

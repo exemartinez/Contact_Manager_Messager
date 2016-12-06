@@ -67,3 +67,88 @@
   "resultado": "Error trying to send the mails to the given contacts"
 }
 
+2016-12-06 19:56:16,545 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-12-06 19:56:16,878 - web services frontend - INFO - The subject received was:mail de pruebas
+2016-12-06 19:56:16,879 - messaging_controller - INFO - Logging into the mail server...
+2016-12-06 19:56:20,968 - mailing_manager - INFO - Error: el usuario, password o servidor son erroneos.
+2016-12-06 19:56:20,969 - messaging_controller - INFO - Sending the mail for prueba@gmail.com
+2016-12-06 19:56:21,503 - messaging_controller - INFO - Error: message delivery wasn't possible
+2016-12-06 19:56:22,148 - Testing - INFO - Values returned: 501 NOT IMPLEMENTED - {
+  "resultado": "Error trying to send the mails to the given contacts"
+}
+
+2016-12-06 20:06:26,922 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-12-06 20:06:26,922 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-12-06 20:06:26,976 - web services frontend - INFO - The subject received was:mail de pruebas
+2016-12-06 20:06:26,976 - web services frontend - INFO - The subject received was:mail de pruebas
+2016-12-06 20:06:26,979 - messaging_controller - INFO - Logging into the mail server...
+2016-12-06 20:06:26,979 - messaging_controller - INFO - Logging into the mail server...
+2016-12-06 20:06:29,471 - mailing_manager - INFO - Error: el usuario, password o servidor son erroneos.
+2016-12-06 20:06:29,471 - mailing_manager - INFO - Error: el usuario, password o servidor son erroneos.
+2016-12-06 20:06:29,472 - messaging_controller - INFO - Sending the mail for prueba@gmail.com
+2016-12-06 20:06:29,472 - messaging_controller - INFO - Sending the mail for prueba@gmail.com
+2016-12-06 20:06:29,969 - Testing - INFO - Values returned: 500 INTERNAL SERVER ERROR - <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request.  Either the server is overloaded or there is an error in the application.</p>
+
+2016-12-06 20:06:29,969 - Testing - INFO - Values returned: 500 INTERNAL SERVER ERROR - <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request.  Either the server is overloaded or there is an error in the application.</p>
+
+2016-12-06 20:12:45,610 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-12-06 20:12:45,970 - web services frontend - INFO - The subject received was:mail de pruebas
+2016-12-06 20:12:45,971 - messaging_controller - INFO - Logging into the mail server...
+2016-12-06 20:12:47,206 - mailing_manager - INFO - Error: el usuario, password o servidor son erroneos.
+2016-12-06 20:12:47,208 - messaging_controller - INFO - Sending the mail for prueba@gmail.com
+2016-12-06 20:12:47,762 - Testing - INFO - Values returned: 500 INTERNAL SERVER ERROR - <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request.  Either the server is overloaded or there is an error in the application.</p>
+
+2016-12-06 20:19:36,609 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-12-06 20:19:36,924 - web services frontend - INFO - The subject received was:mail de pruebas
+2016-12-06 20:19:36,924 - messaging_controller - INFO - Logging into the mail server...
+2016-12-06 20:19:39,579 - mailing_manager - INFO - Error: el usuario, password o servidor son erroneos.
+2016-12-06 20:19:39,580 - messaging_controller - INFO - Sending the mail for prueba@gmail.com
+2016-12-06 20:19:39,962 - messaging_controller - INFO - error for :prueba@gmail.com error: global name 'log' is not defined
+2016-12-06 20:19:39,964 - messaging_controller - INFO - Sending the mail for tests@hotmail.com
+2016-12-06 20:19:40,363 - messaging_controller - INFO - error for :tests@hotmail.com error: global name 'log' is not defined
+2016-12-06 20:19:40,364 - messaging_controller - INFO - Sending the mail for ultimo@yahoo.com
+2016-12-06 20:19:40,762 - messaging_controller - INFO - error for :ultimo@yahoo.com error: global name 'log' is not defined
+2016-12-06 20:19:40,764 - messaging_controller - INFO - Success! login out.
+2016-12-06 20:19:41,076 - Testing - INFO - Values returned: 200 OK - {
+  "resultado": 0
+}
+
+2016-12-06 20:36:19,988 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-12-06 20:36:19,988 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-12-06 20:36:20,058 - web services frontend - INFO - The subject received was:mail de pruebas
+2016-12-06 20:36:20,058 - web services frontend - INFO - The subject received was:mail de pruebas
+2016-12-06 20:36:20,060 - messaging_controller - INFO - Logging into the mail server...
+2016-12-06 20:36:20,060 - messaging_controller - INFO - Logging into the mail server...
+2016-12-06 20:36:22,070 - mailing_manager - INFO - Usuario hernanezequielmartinez@gmail.com conectado.
+2016-12-06 20:36:22,070 - mailing_manager - INFO - Usuario hernanezequielmartinez@gmail.com conectado.
+2016-12-06 20:36:22,073 - messaging_controller - INFO - Sending the mail for prueba@gmail.com
+2016-12-06 20:36:22,073 - messaging_controller - INFO - Sending the mail for prueba@gmail.com
+2016-12-06 20:36:25,337 - messaging_controller - INFO - error for :prueba@gmail.com error: global name 'log' is not defined
+2016-12-06 20:36:25,337 - messaging_controller - INFO - error for :prueba@gmail.com error: global name 'log' is not defined
+2016-12-06 20:36:25,338 - messaging_controller - INFO - Sending the mail for tests@hotmail.com
+2016-12-06 20:36:25,338 - messaging_controller - INFO - Sending the mail for tests@hotmail.com
+2016-12-06 20:36:27,385 - messaging_controller - INFO - error for :tests@hotmail.com error: global name 'log' is not defined
+2016-12-06 20:36:27,385 - messaging_controller - INFO - error for :tests@hotmail.com error: global name 'log' is not defined
+2016-12-06 20:36:27,386 - messaging_controller - INFO - Sending the mail for ultimo@yahoo.com
+2016-12-06 20:36:27,386 - messaging_controller - INFO - Sending the mail for ultimo@yahoo.com
+2016-12-06 20:36:29,016 - messaging_controller - INFO - error for :ultimo@yahoo.com error: global name 'log' is not defined
+2016-12-06 20:36:29,016 - messaging_controller - INFO - error for :ultimo@yahoo.com error: global name 'log' is not defined
+2016-12-06 20:36:29,024 - messaging_controller - INFO - Success! login out.
+2016-12-06 20:36:29,024 - messaging_controller - INFO - Success! login out.
+2016-12-06 20:36:29,278 - Testing - INFO - Values returned: 200 OK - {
+  "resultado": 0
+}
+
+2016-12-06 20:36:29,278 - Testing - INFO - Values returned: 200 OK - {
+  "resultado": 0
+}
+
