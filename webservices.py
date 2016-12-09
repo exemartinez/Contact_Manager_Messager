@@ -53,7 +53,7 @@ def upload_file():
 
             log.info("Saving file to disk...")
             try:
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename)) #TODO: Have to change the filename for unique name, so different users can upload files.
             except Exception as e:
                 log.error("Internal Error:" + str(e))
                 return jsonify({'resultado': 'Error trying to upload the file to the server.'}), 500
