@@ -14,6 +14,11 @@ def index():
 def message():
     '''Sets up a message and selects the recipes.'''
     return render_template("message.html")
+    
+@app.route('/upload')
+def upload():
+    '''renders a file uploader page.'''
+    return render_template("uploads.html")
 
 
 #**************
