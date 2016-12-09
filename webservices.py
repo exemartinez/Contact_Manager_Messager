@@ -29,7 +29,22 @@ def allowed_file(filename):
     '''Defines which sort of files are allowed to be sent to the server'''
     return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
-@app.route('/upload_controller', methods=['GET', 'POST'])
+@app.route('/upload')
+def upload():
+    '''renders a file uploader page.'''
+    return render_template("uploads.html")
+
+@app.route('/message')
+def message():
+    '''Sets up a message and selects the recipes.'''
+    return render_template("message.html")
+
+#**************
+# REST backend
+#**************
+
+
+@app.route('/api/v1.0/upload_controller', methods=['GET', 'POST'])
 def upload_file():
     '''Manages the file after it is sent by a HTML input for uploading.'''
     log.info("Uploading the posted file...")
@@ -65,19 +80,6 @@ def upload_file():
 
     return jsonify({'resultado': 'Wrong form method or signature.'}), 500
 
-@app.route('/upload')
-def upload():
-    '''renders a file uploader page.'''
-    return render_template("uploads.html")
-
-@app.route('/message')
-def message():
-    '''Sets up a message and selects the recipes.'''
-    return render_template("message.html")
-
-#**************
-# REST backend
-#**************
 @app.route('/api/v1.0/mailing/send', methods=['POST'])
 def send_mail_to_contacts():
     '''Returns all the database contacts.'''
