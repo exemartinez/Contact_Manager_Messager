@@ -7,21 +7,21 @@
     /* CSS styles here... */
     </style>
     </head>
-    
+
     <body>
-    
+
     <div>
     <p>Select the file you want to upload to the server. </p>
     </div>
-    
+
     <div>
-        <form id="uploadbanner" enctype="multipart/form-data" method="post" action="/uploaded">
-           <input id="fileupload" name="myfile" type="file" />
+        <form id="uploadbanner" enctype="multipart/form-data" method="post" action="/upload_controller">
+           <input id="file" name="file" type="file" />
            <input type="submit" value="submit" id="submit" />
         </form>
     </div>
-    
-    
+
+
     </body>
-    
+
 </html>
