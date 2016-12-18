@@ -169,3 +169,11 @@
 2016-12-09 18:08:49,636 - web services frontend - INFO - Uploading the posted file...
 2016-12-09 18:08:49,951 - web services frontend - INFO - Saving file to disk...
 2016-12-09 18:08:50,177 - web services frontend - INFO - File uploaded successfully!
+2016-12-18 18:24:54,991 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2016-12-18 18:24:55,081 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2016-12-18 18:35:52,612 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2016-12-18 18:35:52,612 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2016-12-18 18:35:52,708 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2016-12-18 18:35:52,708 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2016-12-18 18:35:52,761 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2016-12-18 18:35:52,761 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no

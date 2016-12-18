@@ -357,8 +357,8 @@ class ContactosController():
 
             contactos.add(conta)
 
-            self.log.info("Record processed: " + str(conta[1]) + " " + str(conta[2]))
-
+            self.log.info("Record processed: " + str(conta.getNombre()) + " " + str(conta.getApellido()))
+            
             return contactos
 
 class Contacto():
