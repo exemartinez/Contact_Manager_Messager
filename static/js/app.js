@@ -43,8 +43,19 @@ CMMessagerApp.controller("InboxCtrl", ["$scope", "CMMessagerAPIDelegate", functi
 
   // Here goes the call to the service that will, eventually, connect with the LinkedIn API.
   this.loadInboxOptions = function() {
-    this.inboxes = CMMessagerAPIDelegate.getContacts();
-    console.log(this.inboxes);
+
+    //uses a promise to deliver the proper values to the frontend
+    //TODO: we're experiencing an issue with the scope; the asynchronicity of the REST api is the problem. It has to be called by callback.
+    CMMessagerAPIDelegate.getContacts()
+    .then(function(data) {
+        $scope.inboxes = data;
+        console.log($scope.inboxes);
+    })
+    .catch(function(err) {
+        $scope.inboxes = null;
+        console.log($scope.inboxes);
+    });
+
   };
 
   //this makes the functionality for the checks and the unchecks of different inboxes.
