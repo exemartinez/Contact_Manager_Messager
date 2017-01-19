@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2016-11-30 00:23:35,071 - Importer.import_linkedin_csv_contacts - INFO - Processing the CSV file exported from LinkedIn (c) 2016 -> ./linkedin_connections_export_microsoft_outlook_dummy.csv
 2016-11-30 00:23:35,076 - Importer.import_linkedin_csv_contacts - INFO - Database connection online.
 2016-11-30 00:23:39,445 - database_transactions - INFO - Database Error: ('UNIQUE constraint failed: contactos.email',)
@@ -1343,3 +1344,285 @@
 2016-12-05 14:37:20,247 - web services frontend - INFO - The values received were:yz
 2016-12-05 14:37:22,006 - mailing_manager - INFO - Error: el usuario, password o servidor son erroneos.
 2016-12-05 14:37:22,318 - mailing_controller - INFO - Error: message delivery wasn't possible
+=======
+2016-12-05 20:43:04,023 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-12-05 20:43:04,040 - web services frontend - INFO - The values received were:yz
+2016-12-05 20:43:04,041 - messaging_controller - INFO - Logging into the mail server...
+2016-12-05 20:43:07,703 - mailing_manager - INFO - Error: el usuario, password o servidor son erroneos.
+2016-12-05 20:43:07,703 - messaging_controller - INFO - Sending the mail...
+2016-12-05 20:43:09,197 - messaging_controller - INFO - Error: message delivery wasn't possible
+2016-12-05 20:43:09,215 - Testing - INFO - Values returned: 501 NOT IMPLEMENTED - {
+  "resultado": "Error trying to send the mails to the given contacts"
+}
+
+2016-12-05 20:47:39,744 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-12-05 20:47:39,764 - web services frontend - INFO - The values received were:yz
+2016-12-05 20:47:39,764 - messaging_controller - INFO - Logging into the mail server...
+2016-12-05 20:47:43,700 - mailing_manager - INFO - Error: el usuario, password o servidor son erroneos.
+2016-12-05 20:47:43,700 - messaging_controller - INFO - Sending the mail...
+2016-12-05 20:47:43,700 - messaging_controller - INFO - Error: message delivery wasn't possible
+2016-12-05 20:47:43,719 - Testing - INFO - Values returned: 501 NOT IMPLEMENTED - {
+  "resultado": "Error trying to send the mails to the given contacts"
+}
+
+2016-12-05 20:48:43,906 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-12-05 20:48:43,926 - web services frontend - INFO - The values received were:yz
+2016-12-05 20:48:43,941 - Testing - INFO - Values returned: 500 INTERNAL SERVER ERROR - <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request.  Either the server is overloaded or there is an error in the application.</p>
+
+2016-12-05 20:49:40,030 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-12-05 20:49:40,054 - web services frontend - INFO - The values received were:yz
+2016-12-05 20:49:40,055 - web services frontend - INFO - The remitentes are:[u'prueba@gmail.com', u'tests@hotmail.com', u'ultimo@yahoo.com']
+2016-12-05 20:49:40,055 - messaging_controller - INFO - Logging into the mail server...
+2016-12-05 20:49:42,201 - mailing_manager - INFO - Error: el usuario, password o servidor son erroneos.
+2016-12-05 20:49:42,201 - messaging_controller - INFO - Sending the mail...
+2016-12-05 20:49:42,202 - messaging_controller - INFO - Error: message delivery wasn't possible
+2016-12-05 20:49:42,219 - Testing - INFO - Values returned: 501 NOT IMPLEMENTED - {
+  "resultado": "Error trying to send the mails to the given contacts"
+}
+
+2016-12-05 20:50:23,194 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-12-05 20:50:23,216 - web services frontend - INFO - The values received were:yz
+2016-12-05 20:50:23,216 - web services frontend - INFO - The remitentes are:prueba@gmail.com
+2016-12-05 20:50:23,217 - messaging_controller - INFO - Logging into the mail server...
+2016-12-05 20:50:26,970 - mailing_manager - INFO - Error: el usuario, password o servidor son erroneos.
+2016-12-05 20:50:26,970 - messaging_controller - INFO - Sending the mail...
+2016-12-05 20:50:26,970 - messaging_controller - INFO - Error: message delivery wasn't possible
+2016-12-05 20:50:26,976 - Testing - INFO - Values returned: 501 NOT IMPLEMENTED - {
+  "resultado": "Error trying to send the mails to the given contacts"
+}
+
+2016-12-05 20:53:27,102 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-12-05 20:53:27,118 - web services frontend - INFO - The values received were:yz
+2016-12-05 20:53:27,118 - messaging_controller - INFO - Logging into the mail server...
+2016-12-05 20:53:31,130 - mailing_manager - INFO - Error: el usuario, password o servidor son erroneos.
+2016-12-05 20:53:31,130 - messaging_controller - INFO - Sending the mail for prueba@gmail.com
+2016-12-05 20:53:32,278 - messaging_controller - INFO - Error: message delivery wasn't possible
+2016-12-05 20:53:32,296 - Testing - INFO - Values returned: 501 NOT IMPLEMENTED - {
+  "resultado": "Error trying to send the mails to the given contacts"
+}
+
+2016-12-05 20:57:36,836 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-12-05 20:57:36,861 - web services frontend - INFO - The values received were:yz
+2016-12-05 20:57:36,861 - messaging_controller - INFO - Logging into the mail server...
+2016-12-05 20:57:40,766 - mailing_manager - INFO - Error: el usuario, password o servidor son erroneos.
+2016-12-05 20:57:40,767 - messaging_controller - INFO - Sending the mail for prueba@gmail.com
+2016-12-05 20:57:42,193 - messaging_controller - INFO - Error: message delivery wasn't possible
+2016-12-05 20:57:42,985 - Testing - INFO - Values returned: 501 NOT IMPLEMENTED - {
+  "resultado": "Error trying to send the mails to the given contacts"
+}
+
+2016-12-06 19:56:16,545 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-12-06 19:56:16,878 - web services frontend - INFO - The subject received was:mail de pruebas
+2016-12-06 19:56:16,879 - messaging_controller - INFO - Logging into the mail server...
+2016-12-06 19:56:20,968 - mailing_manager - INFO - Error: el usuario, password o servidor son erroneos.
+2016-12-06 19:56:20,969 - messaging_controller - INFO - Sending the mail for prueba@gmail.com
+2016-12-06 19:56:21,503 - messaging_controller - INFO - Error: message delivery wasn't possible
+2016-12-06 19:56:22,148 - Testing - INFO - Values returned: 501 NOT IMPLEMENTED - {
+  "resultado": "Error trying to send the mails to the given contacts"
+}
+
+2016-12-06 20:06:26,922 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-12-06 20:06:26,922 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-12-06 20:06:26,976 - web services frontend - INFO - The subject received was:mail de pruebas
+2016-12-06 20:06:26,976 - web services frontend - INFO - The subject received was:mail de pruebas
+2016-12-06 20:06:26,979 - messaging_controller - INFO - Logging into the mail server...
+2016-12-06 20:06:26,979 - messaging_controller - INFO - Logging into the mail server...
+2016-12-06 20:06:29,471 - mailing_manager - INFO - Error: el usuario, password o servidor son erroneos.
+2016-12-06 20:06:29,471 - mailing_manager - INFO - Error: el usuario, password o servidor son erroneos.
+2016-12-06 20:06:29,472 - messaging_controller - INFO - Sending the mail for prueba@gmail.com
+2016-12-06 20:06:29,472 - messaging_controller - INFO - Sending the mail for prueba@gmail.com
+2016-12-06 20:06:29,969 - Testing - INFO - Values returned: 500 INTERNAL SERVER ERROR - <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request.  Either the server is overloaded or there is an error in the application.</p>
+
+2016-12-06 20:06:29,969 - Testing - INFO - Values returned: 500 INTERNAL SERVER ERROR - <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request.  Either the server is overloaded or there is an error in the application.</p>
+
+2016-12-06 20:12:45,610 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-12-06 20:12:45,970 - web services frontend - INFO - The subject received was:mail de pruebas
+2016-12-06 20:12:45,971 - messaging_controller - INFO - Logging into the mail server...
+2016-12-06 20:12:47,206 - mailing_manager - INFO - Error: el usuario, password o servidor son erroneos.
+2016-12-06 20:12:47,208 - messaging_controller - INFO - Sending the mail for prueba@gmail.com
+2016-12-06 20:12:47,762 - Testing - INFO - Values returned: 500 INTERNAL SERVER ERROR - <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request.  Either the server is overloaded or there is an error in the application.</p>
+
+2016-12-06 20:19:36,609 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-12-06 20:19:36,924 - web services frontend - INFO - The subject received was:mail de pruebas
+2016-12-06 20:19:36,924 - messaging_controller - INFO - Logging into the mail server...
+2016-12-06 20:19:39,579 - mailing_manager - INFO - Error: el usuario, password o servidor son erroneos.
+2016-12-06 20:19:39,580 - messaging_controller - INFO - Sending the mail for prueba@gmail.com
+2016-12-06 20:19:39,962 - messaging_controller - INFO - error for :prueba@gmail.com error: global name 'log' is not defined
+2016-12-06 20:19:39,964 - messaging_controller - INFO - Sending the mail for tests@hotmail.com
+2016-12-06 20:19:40,363 - messaging_controller - INFO - error for :tests@hotmail.com error: global name 'log' is not defined
+2016-12-06 20:19:40,364 - messaging_controller - INFO - Sending the mail for ultimo@yahoo.com
+2016-12-06 20:19:40,762 - messaging_controller - INFO - error for :ultimo@yahoo.com error: global name 'log' is not defined
+2016-12-06 20:19:40,764 - messaging_controller - INFO - Success! login out.
+2016-12-06 20:19:41,076 - Testing - INFO - Values returned: 200 OK - {
+  "resultado": 0
+}
+
+2016-12-06 20:36:19,988 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-12-06 20:36:19,988 - Testing - INFO - Error: The configured csv file is in a type of string encoding that cannot be decoded.
+2016-12-06 20:36:20,058 - web services frontend - INFO - The subject received was:mail de pruebas
+2016-12-06 20:36:20,058 - web services frontend - INFO - The subject received was:mail de pruebas
+2016-12-06 20:36:20,060 - messaging_controller - INFO - Logging into the mail server...
+2016-12-06 20:36:20,060 - messaging_controller - INFO - Logging into the mail server...
+2016-12-06 20:36:22,070 - mailing_manager - INFO - Usuario hernanezequielmartinez@gmail.com conectado.
+2016-12-06 20:36:22,070 - mailing_manager - INFO - Usuario hernanezequielmartinez@gmail.com conectado.
+2016-12-06 20:36:22,073 - messaging_controller - INFO - Sending the mail for prueba@gmail.com
+2016-12-06 20:36:22,073 - messaging_controller - INFO - Sending the mail for prueba@gmail.com
+2016-12-06 20:36:25,337 - messaging_controller - INFO - error for :prueba@gmail.com error: global name 'log' is not defined
+2016-12-06 20:36:25,337 - messaging_controller - INFO - error for :prueba@gmail.com error: global name 'log' is not defined
+2016-12-06 20:36:25,338 - messaging_controller - INFO - Sending the mail for tests@hotmail.com
+2016-12-06 20:36:25,338 - messaging_controller - INFO - Sending the mail for tests@hotmail.com
+2016-12-06 20:36:27,385 - messaging_controller - INFO - error for :tests@hotmail.com error: global name 'log' is not defined
+2016-12-06 20:36:27,385 - messaging_controller - INFO - error for :tests@hotmail.com error: global name 'log' is not defined
+2016-12-06 20:36:27,386 - messaging_controller - INFO - Sending the mail for ultimo@yahoo.com
+2016-12-06 20:36:27,386 - messaging_controller - INFO - Sending the mail for ultimo@yahoo.com
+2016-12-06 20:36:29,016 - messaging_controller - INFO - error for :ultimo@yahoo.com error: global name 'log' is not defined
+2016-12-06 20:36:29,016 - messaging_controller - INFO - error for :ultimo@yahoo.com error: global name 'log' is not defined
+2016-12-06 20:36:29,024 - messaging_controller - INFO - Success! login out.
+2016-12-06 20:36:29,024 - messaging_controller - INFO - Success! login out.
+2016-12-06 20:36:29,278 - Testing - INFO - Values returned: 200 OK - {
+  "resultado": 0
+}
+
+2016-12-06 20:36:29,278 - Testing - INFO - Values returned: 200 OK - {
+  "resultado": 0
+}
+
+2016-12-09 17:46:26,838 - web services frontend - INFO - Uploading the posted file...
+2016-12-09 17:46:26,853 - web services frontend - INFO - Saving file to disk...
+2016-12-09 17:53:12,289 - web services frontend - INFO - Uploading the posted file...
+2016-12-09 17:53:12,295 - web services frontend - INFO - Saving file to disk...
+2016-12-09 17:53:12,299 - web services frontend - INFO - Internal Error:[Errno 2] No such file or directory: '/uploads/linkedin_connections_export_microsoft_outlook_dummy.csv'
+2016-12-09 17:54:23,197 - web services frontend - INFO - Uploading the posted file...
+2016-12-09 17:54:23,205 - web services frontend - INFO - Saving file to disk...
+2016-12-09 17:54:23,217 - web services frontend - INFO - File uploaded successfully!
+2016-12-09 17:54:45,517 - web services frontend - INFO - Uploading the posted file...
+2016-12-09 17:54:45,527 - web services frontend - INFO - Saving file to disk...
+2016-12-09 17:54:45,528 - web services frontend - INFO - File uploaded successfully!
+2016-12-09 17:55:34,897 - web services frontend - INFO - Uploading the posted file...
+2016-12-09 17:55:34,931 - web services frontend - INFO - Saving file to disk...
+2016-12-09 17:55:34,933 - web services frontend - INFO - File uploaded successfully!
+2016-12-09 18:08:49,636 - web services frontend - INFO - Uploading the posted file...
+2016-12-09 18:08:49,951 - web services frontend - INFO - Saving file to disk...
+2016-12-09 18:08:50,177 - web services frontend - INFO - File uploaded successfully!
+2016-12-18 18:24:54,991 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2016-12-18 18:24:55,081 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2016-12-18 18:35:52,612 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2016-12-18 18:35:52,612 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2016-12-18 18:35:52,708 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2016-12-18 18:35:52,708 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2016-12-18 18:35:52,761 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2016-12-18 18:35:52,761 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+>>>>>>> 667e093b6e04c1bd3145a994747625ea25a88815
+2017-01-16 14:02:45,121 - web services frontend - INFO - Uploading the posted file...
+2017-01-16 14:02:45,451 - web services frontend - INFO - Saving file to disk...
+2017-01-16 14:02:45,507 - web services frontend - INFO - File uploaded successfully!
+2017-01-18 13:51:27,368 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-18 13:51:27,463 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-18 13:52:27,950 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-18 13:52:27,963 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-18 13:53:54,013 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-18 13:53:54,025 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-18 13:58:04,953 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-18 13:58:04,957 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-18 13:58:34,042 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-18 13:58:34,053 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-18 13:59:15,730 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-18 13:59:15,743 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-18 14:00:15,579 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-18 14:00:15,591 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-18 14:02:37,812 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-18 14:02:37,822 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-18 14:02:37,849 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2017-01-18 14:03:19,816 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-18 14:03:19,828 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-18 14:03:19,864 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2017-01-18 14:03:59,809 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-18 14:03:59,812 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-18 14:03:59,829 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2017-01-18 14:05:37,506 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-18 14:05:37,519 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-18 14:05:37,545 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2017-01-18 14:07:06,322 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-18 14:07:06,332 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-18 14:07:06,344 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2017-01-18 14:09:42,128 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-18 14:09:42,137 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-18 14:09:42,148 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2017-01-18 14:10:50,428 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-18 14:10:50,440 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-18 14:10:50,473 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2017-01-18 14:11:43,319 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-18 14:11:43,329 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-18 14:11:43,358 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2017-01-18 14:12:07,219 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-18 14:12:07,230 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-18 14:12:07,266 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2017-01-18 14:12:31,167 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-18 14:12:31,177 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-18 14:12:31,207 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2017-01-18 14:12:49,115 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-18 14:12:49,127 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-18 14:12:49,154 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2017-01-18 14:13:13,835 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-18 14:13:13,848 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-18 14:13:13,875 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2017-01-18 14:13:43,411 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-18 14:13:43,415 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-18 14:13:43,433 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2017-01-18 14:14:12,153 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-18 14:14:12,167 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-18 14:14:12,194 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2017-01-19 13:19:55,693 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-19 13:19:56,220 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-19 13:19:56,466 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2017-01-19 13:20:57,977 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-19 13:20:57,990 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-19 13:21:00,229 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2017-01-19 13:22:05,801 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-19 13:22:05,815 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-19 13:22:05,834 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2017-01-19 13:23:54,796 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-19 13:23:54,808 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-19 13:23:54,832 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2017-01-19 13:24:34,923 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-19 13:24:34,927 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-19 13:24:34,941 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2017-01-19 13:54:06,283 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-19 13:54:06,288 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-19 13:54:06,292 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2017-01-19 13:54:36,555 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-19 13:54:36,565 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-19 13:54:36,604 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2017-01-19 13:54:40,201 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-19 13:54:40,206 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-19 13:54:40,210 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2017-01-19 13:55:20,384 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-19 13:55:20,388 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-19 13:55:20,404 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2017-01-19 13:57:23,358 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-19 13:57:23,375 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-19 13:57:23,411 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2017-01-19 13:58:52,740 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-19 13:58:52,744 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-19 13:58:52,760 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2017-01-19 13:59:24,269 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-19 13:59:24,283 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-19 13:59:24,336 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2017-01-19 14:00:32,243 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-19 14:00:32,249 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-19 14:00:32,265 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no
+2017-01-19 14:14:19,509 - REST ContactosController - INFO - Openning connections to the database for querying. 
+2017-01-19 14:14:19,520 - REST ContactosController - INFO - Data retrieved. Records: 1335
+2017-01-19 14:14:22,398 - REST ContactosController - INFO - Record processed: N95n705n7colĹ5 F95n705n7oyu35n7nt95n705n7no

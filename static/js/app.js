@@ -44,6 +44,7 @@ CMMessagerApp.controller("InboxCtrl", ["$scope", "CMMessagerAPIDelegate", functi
   // Here goes the call to the service that will, eventually, connect with the LinkedIn API.
   this.loadInboxOptions = function() {
     this.inboxes = CMMessagerAPIDelegate.getContacts();
+    console.log(this.inboxes);
   };
 
   //this makes the functionality for the checks and the unchecks of different inboxes.
@@ -140,13 +141,15 @@ CMMessagerApp.factory('formDataObject', function() {
     };
 });
 
-CMMessagerApp.factory("CMMessagerAPIDelegate", ["$http", "$httpParamSerializer", "Base64", function($http, $httpParamSerializer, Base64){
+CMMessagerApp.factory("CMMessagerAPIDelegate", ["$q","$http", "$httpParamSerializer", "Base64", function($q, $http, $httpParamSerializer, Base64){
 
   var CMMessagerAPIDelegate = {};
 
   //This returns a collection of functions
   CMMessagerAPIDelegate.getContacts = function(){
+
     //TODO Here goes the linkedin Magic
+    /*
     return  [
         {
           userName: "AlmiranteBrown",
@@ -179,6 +182,45 @@ CMMessagerApp.factory("CMMessagerAPIDelegate", ["$http", "$httpParamSerializer",
           tagName: "rrhh"
         }
     ];
+    */
+
+    var defer = $q.defer();
+
+    $http({
+        method: 'GET',
+        url: 'http://localhost:5000/api/v1.0/contactos/all',
+        withCredentials: false,
+        contentType: false,
+        data: $httpParamSerializer()
+    })
+    .then(
+    function successCallback(response) {
+        // Uploading complete
+        //setting the status messages in order TODO: move this to the controller
+        console.log(response.data);
+        contacts = JSON.parse(response.data);
+        defer.resolve(contacts);
+    },
+    function errorCallback(response) {
+        // Uploading incomplete
+        //setting the status messages in order TODO: move this to the controller
+        msg = "<strong> ERROR: Contacts can't be retrieved! </strong> <br>HTTP code: " +
+              response.status +
+              "<br/> message: " +
+              response.statusText +
+              "<br/> data: " +
+              response.data +
+              "<br/> headers: " +
+              response.headers +
+              "<br/> config: " +
+              response.config;
+
+        defer.reject(response.data);
+        $("#statusMessages").html(msg);
+    });
+
+    return defer.promise;
+
   };
 
   //Sends the messages to linkedin's users

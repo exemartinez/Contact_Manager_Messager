@@ -2,14 +2,8 @@ import sys
 import logging
 import locale
 import sqlite3 as sqlite
-#from pysqlite2 import dbapi2 as sqlite
-import logging
-#import unicodecsv as csv
 import csv
 import smtplib
-import sys
-import logging
-import locale
 import chardet
 
 '''
@@ -148,10 +142,10 @@ class MailingManager:
 
             self.server.sendmail(remitente, destinatario, msg)
 
-            log.info( "Correo enviado a " + destinatario + ".")
+            self.log.info( "Correo enviado a " + destinatario + ".")
 
         except:
-            log.error("""Error: el mensaje no pudo enviarse.
+            self.log.error("""Error: el mensaje no pudo enviarse.
             Compruebe que sendmail se encuentra instalado en su sistema""")
 
     def logout(self):
@@ -363,7 +357,7 @@ class ContactosController():
 
             contactos.add(conta)
 
-            self.log.info("Record processed: " + str(conta[1]) + " " + str(conta[2]))
+            self.log.info("Record processed: " + conta.getNombre() + " " + conta.getApellido())
 
             return contactos
 
@@ -415,27 +409,42 @@ class Contacto():
 class MessagingController():
     '''sends massive messaging throught different types of channels'''
 
-    log = LogMngr("mailing_controller")
+    log = LogMngr("messaging_controller")
     mail = MailingManager()
 
-    def send_Massive_Mails_to_Contacts(self, username, passw, mensaje, remitente, destinatario, asunto):
+    def send_Massive_Mails_to_Contacts(self, username, passw, mensaje, remitente, destinatarios, asunto):
         '''receives a set of mail addresses and sends the same mail to everyones of them individually'''
 
         try:
 
+            self.log.info("Logging into the mail server...")
             self.mail.login(username, passw)
 
-            self.mail.sendMail(mensaje, remitente, destinatario, asunto)
+            #This is the core of the app: individual mail sending.
+            for destinatario in destinatarios:
+                try:
+                    self.log.info("Sending the mail for " + str(destinatario))
+                    self.mail.sendMail(mensaje, remitente, destinatario, asunto)
 
+                except Exception as e:
+                    self.log.error("error for :" + str(destinatario) + " error: " + str(e))
+
+                    continue
+
+            self.log.info("Success! login out.")
             self.mail.logout()
 
             return 0
 
-        except:
+        except Exception as e:
 
-            self.log.error("Error: message delivery wasn't possible")
+            self.log.error("Error: message delivery wasn't possible." + " ERROR:" +" error: " + str(e))
+
+            self.mail.logout()
 
             return 1
+
+
 
 '''
 This imports the CSV into the SQLite database.

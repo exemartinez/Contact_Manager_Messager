@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>Select the file you want to upload for processing...</title>
+
+        <!-- Bootstrap -->
+        <link href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="../static/bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="../static/bower_components/angular/angular.min.js"></script>
+        <script src="../static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="../static/bower_components/ngUpload/ng-upload.js"></script>
+
+    </head>
+
+    <body>
+      <div id="main_page" class="container">
+
+        <div class="jumbotron">
+
+            <div class="header clearfix">
+            <p>Select the file you want to upload to the server. </p>
+            </div>
+
+            <form id="uploadbanner" enctype="multipart/form-data" method="post" action="/api/v1.0/upload_controller">
+               <p>
+               <input id="file" name="file" type="file" class="btn-default btn-sm"/><input type="submit" value="Upload" id="submit" class="btn-primary btn-sm"/>
+               </p>
+            </form>
+
+        </div>
+
+      </div>
+    </body>
+
+</html>
