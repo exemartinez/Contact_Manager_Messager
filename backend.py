@@ -5,6 +5,7 @@ import sqlite3 as sqlite
 import csv
 import smtplib
 import chardet
+import json
 
 '''
 The encoding class definition
@@ -330,6 +331,46 @@ class ContactosController():
     '''Manages the Contactos entity for usage. resolves request with a JSON. It's intended to work as a REST web service. '''
 
     log = LogMngr("REST ContactosController")
+    contactos = None
+
+    def getJSONContactosSet(self):
+        """It takes a set with contactos inside and transforms it into a JSON expression as required by the from end."""
+        contactos = self.contactos
+
+        """This is the structure to reproduce as the front-end understands it:
+                [{ "userName": "AlmiranteBrown",
+                  "name": "Almirante Brown",
+                  "tagName": ""
+                }]
+        """
+
+        #json_string = '['
+
+        lst = []
+
+        #here we parse the contacts
+        for conta in contactos:
+            #TODO I've to change the getPosicion for getTipo, but yet it isn't classified.
+            try:
+                """
+                json_string = json_string + '{ "userName": "' + conta.getEmail() + '",'
+                json_string = json_string + '"name": "' + unicode(conta.getNombre()) + ' ' + unicode(conta.getApellido()) + '",'
+                json_string = json_string + '"tagName": "' + conta.getPosicion() + '"},'
+                """
+                testCharEncode = json.dumps({"userName":conta.getEmail(), "name":unicode(conta.getNombre()) + ' ' + unicode(conta.getApellido()), "tagName": conta.getPosicion()})
+
+                lst.append({"userName":conta.getEmail(), "name":unicode(conta.getNombre()) + ' ' + unicode(conta.getApellido()), "tagName": conta.getPosicion()})
+
+            except Exception as exp:
+                self.log.error('Error: ' + str(exp) + ' processing: ' + conta.getEmail())
+
+        #self.log.info('Jsonified the record: ' + json_string[:-1] + ']')
+        self.log.info('Jsonyfied the record: ' + json.dumps(lst))
+
+        #removes the last comma...dirty, I know. TODO: improve this...
+        #return json_string[:-1] + ']'
+        return json.dumps(lst)
+
 
     def getContactosAll(self):
         '''Returns all contactos in database as a JSON'''
@@ -357,9 +398,10 @@ class ContactosController():
 
             contactos.add(conta)
 
-            self.log.info("Record processed: " + conta.getNombre() + " " + conta.getApellido())
+            #self.log.info("Record processed: " + conta.getNombre() + " " + conta.getApellido())
 
-            return contactos
+        self.contactos = contactos
+        return contactos
 
 class Contacto():
     '''

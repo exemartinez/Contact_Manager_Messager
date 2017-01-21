@@ -1,5 +1,5 @@
 <ul ng-controller="InboxCtrl as inboxCtrl" ng-init="inboxCtrl.loadInboxOptions()" >
-  <li ng-repeat="inbox in inboxCtrl.inboxes">
+  <li ng-repeat="inbox in inboxes" >
     <input type="checkbox" id="{{'chk' + inbox.userName}}" class="inboxTag{{inbox.tagName}}" ng-click="inboxCtrl.checkByClick(inbox.userName)" value="{{inbox.userName}}"></input>
     {{inbox.name}} - tag: <a href="" ng-click="inboxCtrl.checkByTag('inboxTag'+inbox.tagName)"><b>{{inbox.tagName}}</b></a>
   </li>

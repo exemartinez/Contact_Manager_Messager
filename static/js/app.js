@@ -38,30 +38,26 @@ CMMessagerApp.controller("InboxCtrl", ["$scope", "CMMessagerAPIDelegate", functi
 
   self = this;
 
-  this.inboxes = [];
-  //this.selectedInboxes = {};
-
   // Here goes the call to the service that will, eventually, connect with the LinkedIn API.
   this.loadInboxOptions = function() {
 
     //uses a promise to deliver the proper values to the frontend
-    //TODO: we're experiencing an issue with the scope; the asynchronicity of the REST api is the problem. It has to be called by callback.
-    CMMessagerAPIDelegate.getContacts()
-    .then(function(data) {
-        $scope.inboxes = data;
-        console.log($scope.inboxes);
-    })
-    .catch(function(err) {
-        $scope.inboxes = null;
-        console.log($scope.inboxes);
-    });
+    result = CMMessagerAPIDelegate.getContacts()
+      .then(function(data) {
+          $scope.inboxes = data;
+          console.log($scope.inboxes);
+      }, function(err) {
+          $scope.inboxes = [];
+          console.log($scope.inboxes);
+      });
 
+      return result;
   };
 
   //this makes the functionality for the checks and the unchecks of different inboxes.
   this.checkByTag = function(inboxTag) {
 
-    inboxList = this.inboxes;
+    inboxList = $scope.inboxes;
 
     //This is to set the checked
     if ($('.'+inboxTag).prop('checked')==false){
@@ -195,9 +191,9 @@ CMMessagerApp.factory("CMMessagerAPIDelegate", ["$q","$http", "$httpParamSeriali
     ];
     */
 
-    var defer = $q.defer();
+    //var defer = $q.defer();
 
-    $http({
+    result = $http({
         method: 'GET',
         url: 'http://localhost:5000/api/v1.0/contactos/all',
         withCredentials: false,
@@ -205,33 +201,32 @@ CMMessagerApp.factory("CMMessagerAPIDelegate", ["$q","$http", "$httpParamSeriali
         data: $httpParamSerializer()
     })
     .then(
-    function successCallback(response) {
-        // Uploading complete
-        //setting the status messages in order TODO: move this to the controller
-        console.log(response.data);
-        contacts = JSON.parse(response.data);
-        defer.resolve(contacts);
-    },
-    function errorCallback(response) {
-        // Uploading incomplete
-        //setting the status messages in order TODO: move this to the controller
-        msg = "<strong> ERROR: Contacts can't be retrieved! </strong> <br>HTTP code: " +
-              response.status +
-              "<br/> message: " +
-              response.statusText +
-              "<br/> data: " +
-              response.data +
-              "<br/> headers: " +
-              response.headers +
-              "<br/> config: " +
-              response.config;
+      function successCallback(response) {
+          // contacts JSON structure retrieved.
+          console.log(response.data);
+          contacts = response.data;
+          return contacts;
+      },
+      function errorCallback(response) {
+          // Uploading incomplete
+          //setting the status messages in order TODO: move this to the controller
+          msg = "<strong> ERROR: Contacts can't be retrieved! </strong> <br>HTTP code: " +
+                response.status +
+                "<br/> message: " +
+                response.statusText +
+                "<br/> data: " +
+                response.data +
+                "<br/> headers: " +
+                response.headers +
+                "<br/> config: " +
+                response.config;
 
-        defer.reject(response.data);
         $("#statusMessages").html(msg);
+
+        return $q.reject(response.data);
     });
 
-    return defer.promise;
-
+    return result;
   };
 
   //Sends the messages to linkedin's users

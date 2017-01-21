@@ -1,5 +1,4 @@
-from flask import Flask, render_template, jsonify, request, json, redirect, url_for
-from flask import send_from_directory
+from flask import Flask, render_template, jsonify, request, json, redirect, url_for, send_from_directory
 import os
 from werkzeug.utils import secure_filename
 from backend import ImportController, ContactosController, MessagingController, LogMngr
@@ -113,15 +112,18 @@ def get_all_contacts():
     #TODO: Have to TEST this method ASAP.
     contactosctrl = ContactosController()
 
-    resultado = contactosctrl.getContactosAll()
+    contactosctrl.getContactosAll()
+    resultado = contactosctrl.getJSONContactosSet()
+
+    log.info(resultado);
 
     #TODO: This has to be replaced by the correct objects obtained from contactosctrl
-    resultado = """[{ "userName": "AlmiranteBrown",
+    """resultado = [{ "userName": "AlmiranteBrown",
                       "name": "Almirante Brown",
                       "tagName": ""
                     }]"""
 
-    return jsonify(resultado), 200
+    return resultado, 200
 
 
 @app.route('/api/v1.0/contactos/load/linkedin/<string:dataFile>', methods=['GET'])
