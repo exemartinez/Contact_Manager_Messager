@@ -352,11 +352,7 @@ class ContactosController():
         for conta in contactos:
             #TODO I've to change the getPosicion for getTipo, but yet it isn't classified.
             try:
-                """
-                json_string = json_string + '{ "userName": "' + conta.getEmail() + '",'
-                json_string = json_string + '"name": "' + unicode(conta.getNombre()) + ' ' + unicode(conta.getApellido()) + '",'
-                json_string = json_string + '"tagName": "' + conta.getPosicion() + '"},'
-                """
+
                 testCharEncode = json.dumps({"userName":conta.getEmail(), "name":unicode(conta.getNombre()) + ' ' + unicode(conta.getApellido()), "tagName": conta.getPosicion()})
 
                 lst.append({"userName":conta.getEmail(), "name":unicode(conta.getNombre()) + ' ' + unicode(conta.getApellido()), "tagName": conta.getPosicion()})

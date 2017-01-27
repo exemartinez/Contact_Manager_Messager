@@ -4,7 +4,7 @@ var CMMessagerApp = angular.module('CMMessagerApp', []);
 /**
 Controllers
 */
-CMMessagerApp.controller('SendController', ['$scope','CMMessagerAPIDelegate', function($scope, CMMessagerAPIDelegate) {
+CMMessagerApp.controller('SendController', ['$scope','$window','CMMessagerAPIDelegate', function($scope, $window, CMMessagerAPIDelegate) {
   self = this;
 
   this.listInboxOpen=false;
@@ -17,19 +17,26 @@ CMMessagerApp.controller('SendController', ['$scope','CMMessagerAPIDelegate', fu
   };
 
   //Sends the message, as a fact. Handles the recepies and attachments (forms the JSON object to interchange)
- this.sendMessage = function sendMessage() {
+   this.sendMessage = function sendMessage() {
 
-    console.log($scope.messageForm.selectedItems);
+      console.log($scope.messageForm.selectedItems);
 
-    this.message.inboxes = "INBOXES DE ANGULAR!";//$("#").val()); //TODO here we need to extract the inboxes from somewhere, and it cannot be the view.
-    this.message.subject = $("#txtSubject").val();
-    this.message.textBody = $("#txtDetails").val();
-    this.message.attachedFile = $("#fileAttachment").val();
+      this.message.inboxes = "INBOXES DE ANGULAR!";//$("#").val()); //TODO here we need to extract the inboxes from somewhere, and it cannot be the view.
+      this.message.subject = $("#txtSubject").val();
+      this.message.textBody = $("#txtDetails").val();
+      this.message.attachedFile = $("#fileAttachment").val();
 
-    //adding the file to form data TODO refactor this, to make it compatible with older browsers.
-    CMMessagerAPIDelegate.sendMessage(this.message);
+      //adding the file to form data TODO refactor this, to make it compatible with older browsers.
+      CMMessagerAPIDelegate.sendMessage(this.message);
 
-  };
+    };
+
+   //Sends the message, as a fact. Handles the recepies and attachments (forms the JSON object to interchange)
+   this.uploadFile = function uploadFile() {
+
+      $window.open("/upload","Upload one file","width=500,height=200");
+
+    };
 
 }]);
 
