@@ -1,9 +1,27 @@
-var CMMessagerApp = angular.module('CMMessagerApp', []);
+var CMMessagerApp = angular.module('CMMessagerApp', ['ngUpload']);
 
 
 /**
 Controllers
 */
+CMMessagerApp.controller('UploadController', ['$scope','$window','CMMessagerAPIDelegate', function($scope, $window, CMMessagerAPIDelegate) {
+  self = this;
+
+  $scope.uploadedFile=null;
+  $scope.uploadForm={};
+
+  //Uploads a file throught the use of a web service REST.
+  $scope.uploadFile = function uploadFile(content) {
+    console.log("enters");
+    console.log(content);
+    //console.log("Uploading file..." + $scope.uploadForm.filePart);
+
+    //CMMessagerAPIDelegate.uploadFileToServer($scope.uploadForm.filePart);
+  };
+
+}]);
+
+//Send message controller
 CMMessagerApp.controller('SendController', ['$scope','$window','CMMessagerAPIDelegate', function($scope, $window, CMMessagerAPIDelegate) {
   self = this;
 
@@ -162,44 +180,6 @@ CMMessagerApp.factory("CMMessagerAPIDelegate", ["$q","$http", "$httpParamSeriali
   //This returns a collection of functions
   CMMessagerAPIDelegate.getContacts = function(){
 
-    //TODO Here goes the linkedin Magic
-    /*
-    return  [
-        {
-          userName: "AlmiranteBrown",
-          name: "Almirante Brown",
-          tagName: ""
-        },
-        {
-          userName: "DoctorWho",
-          name: "Doctor Who",
-          tagName: "directors"
-        },
-        {
-          userName: "LorenaPaola",
-          name: "Lorena Paola",
-          tagName: "rrhh"
-        },
-        {
-          userName: "KatyAleman",
-          name: "Katy Aleman",
-          tagName: "rrhh"
-        },
-        {
-          userName: "BobyFlores",
-          name: "Boby Flores",
-          tagName: "rrhh"
-        },
-        {
-          userName: "DonovanLars",
-          name: "Donovan Lars",
-          tagName: "rrhh"
-        }
-    ];
-    */
-
-    //var defer = $q.defer();
-
     result = $http({
         method: 'GET',
         url: 'http://localhost:5000/api/v1.0/contactos/all',
@@ -236,41 +216,37 @@ CMMessagerApp.factory("CMMessagerAPIDelegate", ["$q","$http", "$httpParamSeriali
     return result;
   };
 
-  //Sends the messages to linkedin's users
-  CMMessagerAPIDelegate.sendMessage = function (message){
-    var msg = "";
+  //calls the uploader web service from the backend to load a file.
+  CMMessagerAPIDelegate.uploadFileToServer = function uploadFileToServer(filePart){
 
-    console.log(JSON.stringify(message));
+    console.log("...calling the web service...");
 
     //message.attachedFile = null;//TODO: this is wrong and must be fixed. The app must support files.
 
     $http({
         method: 'POST',
-        url: 'http://localhost/linkeddyn_msgs/mock_api/',
-        withCredentials: true,
+        url: 'http://localhost:5000/api/v1.0/upload_controller',
+        withCredentials: false,
         contentType: false,
-        transformRequest: angular.identity,
+        //transformRequest: angular.identity,
         headers: {
-          'Authorization': 'Basic ' + Base64.encode('admin:repasstea'),
+          //'Authorization': 'Basic ' + Base64.encode('admin:repasstea'),
           //'Accept':'multipart/form-data',
           //'Content-Type': undefined,
           //'Content-Type': 'application/json',
           //'Content-Type': 'application/x-www-form-urlencoded',
           'Content-Type': 'multipart/form-data',
         },
-        data: $httpParamSerializer(message)
+        data: $httpParamSerializer(filePart)
 
     })
     .then(
     function successCallback(response) {
         // Uploading complete
         //setting the status messages in order TODO: move this to the controller
-        msg = "<strong> Message successfully sent! </strong> <br>";
-        msg += "Subject: " + message.subject + " <br/> Details: <br/>" +
-                  message.textBody + " <br/> Attachment: " +
-                  message.attachedFile;
+        msg = "<strong> Upload successfully sent! </strong> <br>";
 
-        $("#statusMessages").html(msg);
+        console.log(msg);
 
     },
     function errorCallback(response) {
@@ -287,7 +263,7 @@ CMMessagerApp.factory("CMMessagerAPIDelegate", ["$q","$http", "$httpParamSeriali
               "<br/> config: " +
               response.config;
 
-        $("#statusMessages").html(msg);
+        console.log(msg);
     });
 
 

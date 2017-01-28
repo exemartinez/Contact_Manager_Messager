@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html ng-app="CMMessagerApp">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,22 +17,23 @@
         <script src="../static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="../static/bower_components/ngUpload/ng-upload.js"></script>
 
+        <!-- This is the backend code. -->
+        <script src="../static/js/app.js"></script>
     </head>
 
     <body>
       <div id="main_page" class="container">
 
-        <div class="jumbotron">
+        <div class="jumbotron" ng-controller="UploadController as uploadCtrl">
 
             <div class="header clearfix">
             <p>Select the file you want to upload to the server. </p>
             </div>
 
-            <form id="uploadbanner" enctype="multipart/form-data" method="post" action="/api/v1.0/upload_controller">
-               <p>
-               <input id="file" name="file" type="file" class="btn-default btn-sm"/><input type="submit" value="Upload" id="submit" class="btn-primary btn-sm"/>
-               </p>
-            </form>
+           <form method="post" action="/api/v1.0/upload_controller" ng-upload="uploadFile(content)">
+             <input type="file" name="file" id="file"></input>
+             <input type="submit" value="Upload" ng-disabled="$isUploading"></input>
+           </form>
 
         </div>
 

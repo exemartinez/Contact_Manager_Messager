@@ -53,13 +53,13 @@
         <label for="txtDetails" class="badge">Message:</label>
         <textarea id="txtDetails" form="messageForm" class="form-control" rows="10" ng-model="messageForm.message"></textarea><br/>
         <label for="fileAttachment" class="badge">Attachement: </label>
-        <input id="fileAttachment" type="button" value="Attach file" ng-click="sendCtrl.uploadFile()"></input>
         <label for="fileAttachment" class="" id="filePath" ng-model="messageForm.filePath"> NONE </label>
         <br/>
 
         <input id="send" type="button" value="send" class="btn btn-primary" role="button" ng-click="sendCtrl.sendMessage()"></input>
 
       </form>
+
     </div>
 
     <div id="status" class="jumbotron">
