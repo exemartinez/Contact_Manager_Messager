@@ -1,23 +1,71 @@
-<!DOCTYPE>
-<html>
-<title>
-</title>
+<!DOCTYPE html>
+<html lang="en" ng-app="CMMessagerApp">
+
 <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bulk messages with a simple manager</title>
+
+    <!-- Bootstrap -->
+    <link href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../static/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../static/bower_components/angular/angular.min.js"></script>
+    <script src="../static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../static/bower_components/ngUpload/ng-upload.js"></script>
+
+    <!-- This is the backend code. -->
+    <script src="../static/js/app.js"></script>
+
 </head>
+
 <body>
-  <div>
-    <form mthod="post" action="./message">
-    <p>
-      <button type="submit">Prepare message</button>
-    </p>
-  </form>
+
+  <div id="main_page" class="container">
+
+    <div class="header clearfix">
+      <nav>
+        <ul class="nav nav-pills pull-right">
+          <li role="presentation" class="active"><a href="/home">Login</a></li>
+          <li role="presentation"><a href="/message">Sender</a></li>
+          <li role="presentation"><a href="/upload">Advanced</a></li>
+        </ul>
+      </nav>
+      <h3 class="text-muted">Log in into your mail account</h3>
+    </div>
+
+    <br/>
+
+    <div id="loginSection" class="jumbotron" ng-controller="loginController as loginCtrl">
+
+      <form method="post" action="/api/v1.0/login">
+
+        <label for="txtUsername" class="badge">User name: </label>
+        <input id="txtUsername" type="text" value="" class="form-control" ng-model="loginCtrl.userName"></input> <br/>
+        <label for="txtPassword" class="badge">Password:</label>
+        <input id="txtPassword" type="password" class="form-control" ng-model="loginCtrl.passWord"></input> <br/>
+        <label for="txtServer" class="badge">Server (default Gmail):</label>
+        <input id="txtServer" type="text" class="form-control" value="smtp.gmail.com:587" ng-model="loginCtrl.server"></input> <br/>
+
+        <br/>
+
+        <input id="Login" type="button" value="Login" class="btn btn-primary" ng-click="loginCtrl.login()"></input>
+
+      </form>
+
+    </div>
+
+    <div id="status" class="jumbotron">
+      <p id="statusMessages"></p>
+    </div>
+
   </div>
-    <div>
-    <form mthod="post" action="./upload">
-    <p>
-      <button type="submit">Upload file</button>
-    </p>
-  </form>
-  </div>
+
+
 </body>
 </html>

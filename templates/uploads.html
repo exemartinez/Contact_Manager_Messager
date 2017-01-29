@@ -24,19 +24,33 @@
     <body>
       <div id="main_page" class="container">
 
-        <div class="jumbotron" ng-controller="SendController as sendCtrl">
-
-            <div class="header clearfix">
-            <p>Select the file you want to upload to the server. </p>
-            </div>
-
-           <form method="post" action="/api/v1.0/upload_controller" ng-upload="uploadFile(content)">
-             <input type="file" name="file" id="file"></input>
-             <input type="submit" value="Upload" ng-disabled="$isUploading"></input>
-           </form>
-
+        <div class="header clearfix">
+          <nav>
+            <ul class="nav nav-pills pull-right">
+              <li role="presentation"><a href="/home">Login</a></li>
+              <li role="presentation"><a href="/message">Sender</a></li>
+              <li role="presentation" class="active"><a href="/upload">Advanced</a></li>
+            </ul>
+          </nav>
+          <h3 class="text-muted">Upload your linkedin contacts</h3>
         </div>
 
+        <div id="main_page" class="container">
+
+          <div class="jumbotron" ng-controller="SendController as sendCtrl">
+
+              <div class="header clearfix">
+              <p>Select the file you want to upload to the server. </p>
+              </div>
+
+             <form method="post" action="/api/v1.0/upload_controller" ng-upload="uploadFile(content)">
+               <input type="file" name="file" id="file" class="form-control"></input>
+               <input type="submit" value="Upload" class="btn btn-primary" ng-disabled="$isUploading"></input>
+             </form>
+
+          </div>
+
+        </div>
       </div>
     </body>
 

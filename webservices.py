@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, json, redirect, url_for, send_from_directory
+from flask import Flask, render_template, jsonify, request, json, redirect, url_for, send_from_directory, session
 import os
 from werkzeug.utils import secure_filename
 from backend import ImportController, ContactosController, MessagingController, LogMngr

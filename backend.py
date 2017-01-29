@@ -115,6 +115,11 @@ class MailingManager:
     #System controllers: logs and others
     log = LogMngr("mailing_manager")
 
+    #setting up the mail server
+    def setServer(self, server):
+        self.server = smtplib.SMTP(server)
+
+    #login to the mail server
     def login(self, username, password):
         '''This allows the entire app to login'''
         try:
