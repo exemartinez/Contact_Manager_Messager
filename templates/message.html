@@ -39,9 +39,12 @@
       <h3 class="text-muted">Bulk Messages with a simple manager</h3>
     </div>
 
+    <br/>
+
     <div id="sendMessageSection" class="jumbotron" ng-controller="SendController as sendCtrl">
+
       <small><b>Note: </b>Select the recipies and then send your message (Do not forget to attach the due files)</small>
-      <form id="messageForm" ng-model="messageForm">
+      <form method="post" action="/api/v1.0/upload_controller" ng-upload="uploadFile(content)">
 
         <label for="btnInboxes" class="badge">To: </label>
         <input id="btnInboxes" type="button" value="Select Receivers" ng-click="sendCtrl.addressToReceive()"></input> <br/>
@@ -52,11 +55,23 @@
         <input id="txtSubject" type="text" class="form-control" ng-model="messageForm.subject"></input> <br/>
         <label for="txtDetails" class="badge">Message:</label>
         <textarea id="txtDetails" form="messageForm" class="form-control" rows="10" ng-model="messageForm.message"></textarea><br/>
-        <label for="fileAttachment" class="badge">Attachement: </label>
-        <label for="fileAttachment" class="" id="filePath" ng-model="messageForm.filePath"> NONE </label>
+
         <br/>
 
-        <input id="send" type="button" value="send" class="btn btn-primary" role="button" ng-click="sendCtrl.sendMessage()"></input>
+        <label class="badge">Attachement: </label>
+
+        <br/>
+
+        <input id="file" name="file" type="file" class="form-control"></input>
+
+        <input id="upload" type="submit" value="upload" class="btn btn-secondary" ng-disabled="$isUploading"></input>
+        <label> File uploaded as: </label>
+        <label id="fileAttachment" class="" ng-model="messageForm.fileName"> NONE </label>
+
+        <br/>
+        <br/>
+
+        <input id="send" type="button" value="send" class="btn btn-primary" ng-click="sendCtrl.sendMessage()"></input>
 
       </form>
 

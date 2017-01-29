@@ -4,22 +4,6 @@ var CMMessagerApp = angular.module('CMMessagerApp', ['ngUpload']);
 /**
 Controllers
 */
-CMMessagerApp.controller('UploadController', ['$scope','$window','CMMessagerAPIDelegate', function($scope, $window, CMMessagerAPIDelegate) {
-  self = this;
-
-  $scope.uploadedFile=null;
-  $scope.uploadForm={};
-
-  //Uploads a file throught the use of a web service REST.
-  $scope.uploadFile = function uploadFile(content) {
-    console.log("enters");
-    console.log(content);
-    //console.log("Uploading file..." + $scope.uploadForm.filePart);
-
-    //CMMessagerAPIDelegate.uploadFileToServer($scope.uploadForm.filePart);
-  };
-
-}]);
 
 //Send message controller
 CMMessagerApp.controller('SendController', ['$scope','$window','CMMessagerAPIDelegate', function($scope, $window, CMMessagerAPIDelegate) {
@@ -27,7 +11,16 @@ CMMessagerApp.controller('SendController', ['$scope','$window','CMMessagerAPIDel
 
   this.listInboxOpen=false;
   this.message = {};
-  $scope.messageForm = {}; //This initiates the object for the entire form to collect the data for the controller. TODO: we need to change this for a proper form.
+  $scope.messageForm = {selectedItems:null, subject:"", message:"", fileName:""}; //This initiates the object for the entire form to collect the data for the controller.
+
+  //Uploads a file throught the use of a web service REST.
+  $scope.uploadFile = function uploadFile(content) {
+
+    console.log("Uploaded file: " + content["resultado"]);
+    $scope.messageForm.fileName=content["resultado"];
+    $('#fileAttachment').text(content["resultado"]);
+
+  };
 
   //Shows the list of possible message inboxes.
   this.addressToReceive = function addressToReceive() {
@@ -37,15 +30,10 @@ CMMessagerApp.controller('SendController', ['$scope','$window','CMMessagerAPIDel
   //Sends the message, as a fact. Handles the recepies and attachments (forms the JSON object to interchange)
    this.sendMessage = function sendMessage() {
 
-      console.log($scope.messageForm.selectedItems);
-
-      this.message.inboxes = "INBOXES DE ANGULAR!";//$("#").val()); //TODO here we need to extract the inboxes from somewhere, and it cannot be the view.
-      this.message.subject = $("#txtSubject").val();
-      this.message.textBody = $("#txtDetails").val();
-      this.message.attachedFile = $("#fileAttachment").val();
+      console.log($scope.messageForm);
 
       //adding the file to form data TODO refactor this, to make it compatible with older browsers.
-      CMMessagerAPIDelegate.sendMessage(this.message);
+      CMMessagerAPIDelegate.sendMessage($scope.messageForm);
 
     };
 
@@ -173,6 +161,7 @@ CMMessagerApp.factory('formDataObject', function() {
     };
 });
 
+//REST API handler - this manages the calls to the web services.
 CMMessagerApp.factory("CMMessagerAPIDelegate", ["$q","$http", "$httpParamSerializer", "Base64", function($q, $http, $httpParamSerializer, Base64){
 
   var CMMessagerAPIDelegate = {};
@@ -216,28 +205,26 @@ CMMessagerApp.factory("CMMessagerAPIDelegate", ["$q","$http", "$httpParamSeriali
     return result;
   };
 
-  //calls the uploader web service from the backend to load a file.
-  CMMessagerAPIDelegate.uploadFileToServer = function uploadFileToServer(filePart){
+  //Sends the mailing message to the web service to manage it, and finally, send each one...by one.
+  CMMessagerAPIDelegate.sendMessage = function sendMessage(messageData){
 
     console.log("...calling the web service...");
 
-    //message.attachedFile = null;//TODO: this is wrong and must be fixed. The app must support files.
-
     $http({
         method: 'POST',
-        url: 'http://localhost:5000/api/v1.0/upload_controller',
-        withCredentials: false,
-        contentType: false,
+        url: 'http://localhost:5000/api/v1.0/mailing/send',
+        //withCredentials: false,
+        //contentType: false,
         //transformRequest: angular.identity,
         headers: {
           //'Authorization': 'Basic ' + Base64.encode('admin:repasstea'),
           //'Accept':'multipart/form-data',
           //'Content-Type': undefined,
-          //'Content-Type': 'application/json',
+          'Content-Type': 'application/json',
           //'Content-Type': 'application/x-www-form-urlencoded',
-          'Content-Type': 'multipart/form-data',
+          //'Content-Type': 'multipart/form-data',
         },
-        data: $httpParamSerializer(filePart)
+        data: messageData
 
     })
     .then(

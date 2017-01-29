@@ -52,7 +52,6 @@ def upload_file():
         # check if the post request has the file part
         if 'file' not in request.files:
             log.error("No file part")
-            flash('No file part')
             return redirect(request.url)
 
         file = request.files['file']
@@ -60,7 +59,6 @@ def upload_file():
         # if user does not select file, browser also submit a empty part without filename
         if file.filename == '':
             log.error("No selected file")
-            flash('No selected file')
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
@@ -85,19 +83,26 @@ def send_mail_to_contacts():
 
     #TODO: Have to TEST this method ASAP.
     mailctrl = MessagingController()
+    log.info("Params: " + str(request.json))
 
+    #TODO: This has to be reennacted as soon as I implement login for the mailing service.
+    """
     if not request.json or not 'username' in request.json:
         return jsonify({'resultado': 'Bad parameters or JSON structure'}), 400
+    """
 
     #parsing post parameters
-    username = request.json['username']
-    passw = request.json['passw']
-    mensaje = request.json['mensaje']
-    remitente = request.json['remitente']
-    destinatarios = request.json['destinatarios'] #it comes as a list and is inmediatly transformed: access it by "destinatarios[x]"
-    asunto = request.json['asunto']
+    #username = request.json['username']
+    username=""
+    #passw = request.json['passw']
+    passw=""
+    mensaje = request.json['message']
+    #remitente = request.json['remitente']
+    remitente=""
+    destinatarios = request.json['selectedItems'] #it comes as a list and is inmediatly transformed: access it by "destinatarios[x]"
+    asunto = request.json['subject']
 
-    log.info("The subject received was:" + request.json['asunto'])
+    log.info("The subject received was:" + request.json['subject'])
 
     resultado = mailctrl.send_Massive_Mails_to_Contacts(username, passw, mensaje,remitente, destinatarios, asunto)
 
