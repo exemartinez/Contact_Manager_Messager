@@ -17,7 +17,16 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 @app.route('/home')
 def index():
     '''Establishes the app entry point.'''
+
     return render_template("home.html")
+
+@app.route('/logoff')
+def clearsession():
+    """Logs off the user from the app."""
+    # Clear the session
+    session.clear()
+    # Redirect the user to the main page
+    return redirect(url_for('home'))
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
@@ -42,7 +51,14 @@ def message():
 # REST backend
 #**************
 
+@app.route('/api/v1.0/mailing/login_try', methods=['GET', 'POST'])
+def login_mail():
+    '''This logs into the mailing server and takes the credentials for further usage.'''
+    log.info("Login into the mail service...")
 
+    log.info("1 " + request.json['user'])
+    '''request.json['pass']
+    request.json['server']'''
 @app.route('/api/v1.0/upload_controller', methods=['GET', 'POST'])
 def upload_file():
     '''Manages the file after it is sent by a HTML input for uploading.'''

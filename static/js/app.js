@@ -6,6 +6,24 @@ Controllers
 */
 
 //Send message controller
+CMMessagerApp.controller('loginController', ['$scope','$window','CMMessagerAPIDelegate', function($scope, $window, CMMessagerAPIDelegate) {
+
+  this.server = "smtp.gmail.com:587";
+
+  //Uploads a file throught the use of a web service REST.
+  this.login = function login() {
+
+    console.log("Login in user: " + this.userName);
+
+    //tries to log a user onto his mailing service.
+
+    CMMessagerAPIDelegate.loginMail(this.userName, this.passWord, this.server);
+
+  };
+
+}]);
+
+//Send message controller
 CMMessagerApp.controller('SendController', ['$scope','$window','CMMessagerAPIDelegate', function($scope, $window, CMMessagerAPIDelegate) {
   self = this;
 
@@ -240,6 +258,54 @@ CMMessagerApp.factory("CMMessagerAPIDelegate", ["$q","$http", "$httpParamSeriali
         // Uploading incomplete
         //setting the status messages in order TODO: move this to the controller
         msg = "<strong> ERROR: Message NOT sent! </strong> <br>HTTP code: " +
+              response.status +
+              "<br/> message: " +
+              response.statusText +
+              "<br/> data: " +
+              response.data +
+              "<br/> headers: " +
+              response.headers +
+              "<br/> config: " +
+              response.config;
+
+        console.log(msg);
+    });
+
+
+  };
+
+  //Tries to login into the user mailing service.
+  CMMessagerAPIDelegate.loginMail = function loginMail(user, pass, server){
+
+    console.log("...calling the web service...");
+
+    $http({
+        method: 'POST',
+        url: 'http://localhost:5000/api/v1.0/mailing/login_try',
+        //withCredentials: false,
+        //contentType: false,
+        //transformRequest: angular.identity,
+        headers: {
+          //'Authorization': 'Basic ' + Base64.encode('admin:repasstea'),
+          //'Accept':'multipart/form-data',
+          //'Content-Type': undefined,
+          'Content-Type': 'application/json',
+          //'Content-Type': 'application/x-www-form-urlencoded',
+          //'Content-Type': 'multipart/form-data',
+        },
+        params: {"user":user,"pass": pass,"server": server}
+
+    })
+    .then(
+    function successCallback(response) {
+       //Logins into the user's mailing system.
+
+        console.log("Logged in with success!" + response.data);
+
+    },
+    function errorCallback(response) {
+        //setting the status messages in order TODO: move this to the controller
+        msg = "<strong> ERROR: Login failed! </strong> <br>HTTP code: " +
               response.status +
               "<br/> message: " +
               response.statusText +
