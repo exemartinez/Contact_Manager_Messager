@@ -285,15 +285,15 @@ CMMessagerApp.factory("CMMessagerAPIDelegate", ["$q","$http", "$httpParamSeriali
         //withCredentials: false,
         //contentType: false,
         //transformRequest: angular.identity,
-        headers: {
+        //headers: {
           //'Authorization': 'Basic ' + Base64.encode('admin:repasstea'),
           //'Accept':'multipart/form-data',
           //'Content-Type': undefined,
           'Content-Type': 'application/json',
           //'Content-Type': 'application/x-www-form-urlencoded',
           //'Content-Type': 'multipart/form-data',
-        },
-        params: {"user":user,"pass": pass,"server": server}
+        //},
+        data: JSON.stringify({"user":user,"pass": pass,"server": server})
 
     })
     .then(

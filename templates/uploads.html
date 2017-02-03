@@ -30,10 +30,13 @@
               <li role="presentation"><a href="/home">Login</a></li>
               <li role="presentation"><a href="/message">Sender</a></li>
               <li role="presentation" class="active"><a href="/upload">Advanced</a></li>
+              <li role="presentation"><a href="/logoff">Log off</a></li>
             </ul>
           </nav>
           <h3 class="text-muted">Upload your linkedin contacts</h3>
         </div>
+
+        {% if 'user' in session %}
 
         <div id="main_page" class="container">
 
@@ -52,6 +55,16 @@
 
         </div>
       </div>
-    </body>
+      {% else %}
 
+      <div id="status" class="jumbotron">
+        <p id="statusMessages"> Bad Log in, try again! </p>
+      </div>
+
+      {% endif %}
+
+    </div>
+
+
+  </body>
 </html>

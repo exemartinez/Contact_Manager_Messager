@@ -1,7 +1,7 @@
 from flask import Flask, render_template, jsonify, request, json, redirect, url_for, send_from_directory, session
 import os
 from werkzeug.utils import secure_filename
-from backend import ImportController, ContactosController, MessagingController, LogMngr
+from backend import ImportController, ContactosController, MessagingController, LogMngr, MailingManager
 
 #Constants
 UPLOAD_FOLDER = './uploads'
@@ -9,6 +9,7 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif','doc','csv',
 
 #Flask Settings
 app = Flask(__name__)
+app.secret_key = '003-Gr4c10s0+50s$Gar0f4!' #special key for coding the session variables.
 log = LogMngr("web services frontend")
 app.config['MAX_CONTENT_LENGTH'] = 64 * 1024 * 1024 #it allows to upload a file of up to 64mb.
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -26,7 +27,7 @@ def clearsession():
     # Clear the session
     session.clear()
     # Redirect the user to the main page
-    return redirect(url_for('home'))
+    return redirect('/home')
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
@@ -51,14 +52,48 @@ def message():
 # REST backend
 #**************
 
-@app.route('/api/v1.0/mailing/login_try', methods=['GET', 'POST'])
+@app.route('/api/v1.0/mailing/login_try', methods=['POST'])
 def login_mail():
     '''This logs into the mailing server and takes the credentials for further usage.'''
     log.info("Login into the mail service...")
 
-    log.info("1 " + request.json['user'])
-    '''request.json['pass']
-    request.json['server']'''
+    post = request.get_json()
+
+    user = post.get('user')
+    password = post.get('pass')
+    server = post.get('server')
+
+    result = False
+
+    try:
+
+        log.info("User to login: " + user)
+        mail = MailingManager()
+        mail.setServer(server)
+
+        result = mail.login(user, password)
+
+        if(result):
+
+            session['user']=user
+            session['password']=password
+            session['server']=server
+
+            return jsonify({'resultado': 'User logged in!.'}), 200
+
+        else:
+
+            session.clear()
+            return jsonify({'resultado': 'Bad user name or password.'}), 400
+
+    except Exception as e:
+
+        log.error("ERROR: " + str(e))
+        session.clear()
+        return jsonify({'resultado': 'Can\'t log in.'}), 500
+
+    return jsonify({'resultado': 'User logged in!.'}), 200
+
 @app.route('/api/v1.0/upload_controller', methods=['GET', 'POST'])
 def upload_file():
     '''Manages the file after it is sent by a HTML input for uploading.'''
@@ -108,19 +143,17 @@ def send_mail_to_contacts():
     """
 
     #parsing post parameters
-    #username = request.json['username']
-    username=""
-    #passw = request.json['passw']
-    passw=""
+
+    username=session['user']
+    passw=session['password']
     mensaje = request.json['message']
-    #remitente = request.json['remitente']
-    remitente=""
+    remitente=session['user']
     destinatarios = request.json['selectedItems'] #it comes as a list and is inmediatly transformed: access it by "destinatarios[x]"
     asunto = request.json['subject']
 
     log.info("The subject received was:" + request.json['subject'])
 
-    resultado = mailctrl.send_Massive_Mails_to_Contacts(username, passw, mensaje,remitente, destinatarios, asunto)
+    resultado = mailctrl.send_Massive_Mails_to_Contacts(username, passw, mensaje,remitente, destinatarios, asunto, session['server'])
 
     if(resultado==0):
         return jsonify({'resultado': resultado}), 200
@@ -137,12 +170,6 @@ def get_all_contacts():
     resultado = contactosctrl.getJSONContactosSet()
 
     log.info(resultado);
-
-    #TODO: This has to be replaced by the correct objects obtained from contactosctrl
-    """resultado = [{ "userName": "AlmiranteBrown",
-                      "name": "Almirante Brown",
-                      "tagName": ""
-                    }]"""
 
     return resultado, 200
 

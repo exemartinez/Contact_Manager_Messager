@@ -122,16 +122,20 @@ class MailingManager:
     #login to the mail server
     def login(self, username, password):
         '''This allows the entire app to login'''
+        result = False
+
         try:
             #This is an example of Google Mail:
             self.server.ehlo()
             self.server.starttls()
-            self.server.login(username,password)
+            result = self.server.login(username,password)
 
             self.log.info( "Usuario " + username + " conectado.")
 
         except:
             self.log.error("""Error: el usuario, password o servidor son erroneos.""")
+
+        return result
 
     def sendMail(self, mensaje, remitente, destinatario, asunto):
         '''Sends a mail to a given account.'''
@@ -342,13 +346,6 @@ class ContactosController():
         """It takes a set with contactos inside and transforms it into a JSON expression as required by the from end."""
         contactos = self.contactos
 
-        """This is the structure to reproduce as the front-end understands it:
-                [{ "userName": "AlmiranteBrown",
-                  "name": "Almirante Brown",
-                  "tagName": ""
-                }]
-        """
-
         #json_string = '['
 
         lst = []
@@ -455,12 +452,13 @@ class MessagingController():
     log = LogMngr("messaging_controller")
     mail = MailingManager()
 
-    def send_Massive_Mails_to_Contacts(self, username, passw, mensaje, remitente, destinatarios, asunto):
+    def send_Massive_Mails_to_Contacts(self, username, passw, mensaje, remitente, destinatarios, asunto, server):
         '''receives a set of mail addresses and sends the same mail to everyones of them individually'''
 
         try:
 
             self.log.info("Logging into the mail server...")
+            self.mail.setServer(server)
             self.mail.login(username, passw)
 
             #This is the core of the app: individual mail sending.
