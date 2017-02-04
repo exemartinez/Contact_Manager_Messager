@@ -48,9 +48,14 @@
 
              <form method="post" action="/api/v1.0/upload_controller" ng-upload="uploadFile(content)">
                <input type="file" name="file" id="file" class="form-control"></input>
+               <br/>
+               <label> File uploaded as: </label>
+               <label id="fileAttachment" class="" ng-model="messageForm.fileName"> NONE </label>
+               <br/>
                <input type="submit" value="Upload" class="btn btn-primary" ng-disabled="$isUploading"></input>
              </form>
 
+             <input id="import" type="button" value="Import" class="btn btn-primary" ng-click="sendCtrl.importContacts()"></input>
           </div>
 
         </div>

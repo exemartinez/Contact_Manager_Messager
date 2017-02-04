@@ -31,6 +31,16 @@ CMMessagerApp.controller('SendController', ['$scope','$window','CMMessagerAPIDel
   this.message = {};
   $scope.messageForm = {selectedItems:null, subject:"", message:"", fileName:""}; //This initiates the object for the entire form to collect the data for the controller.
 
+  //Imports a previously uploaded file with contacts' information in it.
+   this.importContacts = function importContacts() {
+
+      console.log($scope.messageForm);
+
+      //adding the file to form data TODO refactor this, to make it compatible with older browsers.
+      CMMessagerAPIDelegate.importDataFile($scope.messageForm);
+
+    };
+
   //Uploads a file throught the use of a web service REST.
   $scope.uploadFile = function uploadFile(content) {
 
@@ -224,6 +234,57 @@ CMMessagerApp.factory("CMMessagerAPIDelegate", ["$q","$http", "$httpParamSeriali
   };
 
   //Sends the mailing message to the web service to manage it, and finally, send each one...by one.
+  CMMessagerAPIDelegate.importDataFile = function importDataFile(fileData){
+
+    console.log("...calling the web service...");
+
+    $http({
+        method: 'POST',
+        url: 'http://localhost:5000/api/v1.0/contactos/load/linkedin' ,
+        //withCredentials: false,
+        //contentType: false,
+        //transformRequest: angular.identity,
+        headers: {
+          //'Authorization': 'Basic ' + Base64.encode('admin:repasstea'),
+          //'Accept':'multipart/form-data',
+          //'Content-Type': undefined,
+          'Content-Type': 'application/json',
+          //'Content-Type': 'application/x-www-form-urlencoded',
+          //'Content-Type': 'multipart/form-data',
+        },
+        data: fileData
+
+    })
+    .then(
+    function successCallback(response) {
+        // Uploading complete
+        //setting the status messages in order TODO: move this to the controller
+        msg = "<strong> Import successfully done! </strong> <br>";
+
+        console.log(msg);
+
+    },
+    function errorCallback(response) {
+        // Uploading incomplete
+        //setting the status messages in order TODO: move this to the controller
+        msg = "<strong> ERROR: Message NOT sent! </strong> <br>HTTP code: " +
+              response.status +
+              "<br/> message: " +
+              response.statusText +
+              "<br/> data: " +
+              response.data +
+              "<br/> headers: " +
+              response.headers +
+              "<br/> config: " +
+              response.config;
+
+        console.log(msg);
+    });
+
+
+  };
+
+  //Sends the mailing message to the web service to manage it, and finally, send each one...by one.
   CMMessagerAPIDelegate.sendMessage = function sendMessage(messageData){
 
     console.log("...calling the web service...");
@@ -249,7 +310,7 @@ CMMessagerApp.factory("CMMessagerAPIDelegate", ["$q","$http", "$httpParamSeriali
     function successCallback(response) {
         // Uploading complete
         //setting the status messages in order TODO: move this to the controller
-        msg = "<strong> Upload successfully sent! </strong> <br>";
+        msg = "<strong> Mail and attachments successfully sent! </strong> <br>";
 
         console.log(msg);
 

@@ -175,17 +175,17 @@ def get_all_contacts():
     return resultado, 200
 
 
-@app.route('/api/v1.0/contactos/load/linkedin/<string:dataFile>', methods=['GET'])
-def post_load_linkedin_contacts(dataFile):
+@app.route('/api/v1.0/contactos/load/linkedin', methods=['GET', 'POST'])
+def post_load_linkedin_contacts():
     #TODO: Has to wrte the tests.
     '''Loads a all the database contacts.'''
     imp = ImportController()
 
-    res = imp.import_Linkedin_Csv_Contacts(str(dataFile))
+    log.info("Importing file " + request.json['fileName'] + " into the database.");
+    res = imp.import_Linkedin_Csv_Contacts(str("." + request.json['fileName']))
 
     if (res):
         return jsonify({'resultado': res}), 200
-
     else:
         return jsonify({'resultado': res}), 501
 

@@ -2,6 +2,8 @@ from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
+from email import Encoders
+
 import sys
 import logging
 import locale
@@ -170,7 +172,7 @@ class MailingManager:
         	attachFile = MIMEBase('application', 'octet-stream')
 
         attachFile.set_payload(file("." + attachment).read())
-        #Encoders.encode_base64(attachFile)
+        Encoders.encode_base64(attachFile)
         attachFile.add_header('Content-Disposition', 'attachment', filename=attachment)
 
         msg.attach(attachFile)
