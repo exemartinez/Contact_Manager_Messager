@@ -31,22 +31,66 @@ CMMessagerApp.controller('SendController', ['$scope','$window','CMMessagerAPIDel
   this.message = {};
   $scope.messageForm = {selectedItems:null, subject:"", message:"", fileName:""}; //This initiates the object for the entire form to collect the data for the controller.
 
+  // Private function - This interchanges the upload and import button, conviniently.
+  function changeUploadButtons() {
+
+    if ($('#import').prop('disabled')){
+
+      $('#import').prop('disabled', false);
+      $('#import').attr('class', 'btn btn-primary'); //toggleClass('btn-primary');
+
+      $('#btnUpload').attr('class', 'btn btn-secondary'); //.toggleClass('btn-secondary');
+      $('#btnUpload').prop('disabled', true);
+
+    }else{
+
+      $('#import').prop('disabled', true);
+      $('#import').attr('class', 'btn btn-secondary'); //toggleClass('btn-primary');
+
+      $('#btnUpload').attr('class', 'btn btn-primary'); //.toggleClass('btn-secondary');
+      $('#btnUpload').prop('disabled', false);
+
+    }
+
+  };
+
   //Imports a previously uploaded file with contacts' information in it.
    this.importContacts = function importContacts() {
 
       console.log($scope.messageForm);
+      //TODO: need to change it for a promise.
+      $('#statusMessages').text("Importing the file...");
+
+      //Freezing the buttons.
+      changeUploadButtons();
 
       //adding the file to form data TODO refactor this, to make it compatible with older browsers.
-      CMMessagerAPIDelegate.importDataFile($scope.messageForm);
+      result = CMMessagerAPIDelegate.importDataFile($scope.messageForm);
 
-    };
+  };
 
   //Uploads a file throught the use of a web service REST.
   $scope.uploadFile = function uploadFile(content) {
+    //TODO: this has to be refactored to make it specific to the given form.
 
-    console.log("Uploaded file: " + content["resultado"]);
-    $scope.messageForm.fileName=content["resultado"];
-    $('#fileAttachment').text(content["resultado"]);
+    if(content["code"]==200){
+
+      console.log("Uploaded file: " + content["resultado"]);
+
+      $scope.messageForm.fileName=content["resultado"];
+
+      //Reseting the front-end.
+      $('#fileAttachment').text(content["resultado"]);
+      changeUploadButtons();
+      $('#statusMessages').text("File successfully uploaded; import it.");
+
+    }else{
+
+      console.log("Error meanwhile the file uploading: " + content["resultado"] + ", Code: " + content["code"]);
+      $('#statusMessages').text(content["resultado"]);
+      $('#import').prop('disabled', true);
+
+    }
 
   };
 
@@ -62,13 +106,6 @@ CMMessagerApp.controller('SendController', ['$scope','$window','CMMessagerAPIDel
 
       //adding the file to form data TODO refactor this, to make it compatible with older browsers.
       CMMessagerAPIDelegate.sendMessage($scope.messageForm);
-
-    };
-
-   //Sends the message, as a fact. Handles the recepies and attachments (forms the JSON object to interchange)
-   this.uploadFile = function uploadFile() {
-
-      $window.open("/upload","Upload one file","width=500,height=200");
 
     };
 
@@ -240,7 +277,8 @@ CMMessagerApp.factory("CMMessagerAPIDelegate", ["$q","$http", "$httpParamSeriali
 
     $http({
         method: 'POST',
-        url: 'http://localhost:5000/api/v1.0/contactos/load/linkedin' ,
+        //url: 'http://localhost:5000/api/v1.0/contactos/load/linkedin' ,
+        url: '/api/v1.0/contactos/load/linkedin' ,
         //withCredentials: false,
         //contentType: false,
         //transformRequest: angular.identity,
@@ -260,14 +298,14 @@ CMMessagerApp.factory("CMMessagerAPIDelegate", ["$q","$http", "$httpParamSeriali
         // Uploading complete
         //setting the status messages in order TODO: move this to the controller
         msg = "<strong> Import successfully done! </strong> <br>";
-
+        $('#statusMessages').html(msg);
         console.log(msg);
 
     },
     function errorCallback(response) {
         // Uploading incomplete
         //setting the status messages in order TODO: move this to the controller
-        msg = "<strong> ERROR: Message NOT sent! </strong> <br>HTTP code: " +
+        msg = "<strong> ERROR: File NOT imported! </strong> <br>HTTP code: " +
               response.status +
               "<br/> message: " +
               response.statusText +
@@ -279,8 +317,8 @@ CMMessagerApp.factory("CMMessagerAPIDelegate", ["$q","$http", "$httpParamSeriali
               response.config;
 
         console.log(msg);
+        $('#statusMessages').html(msg);
     });
-
 
   };
 

@@ -50,16 +50,24 @@
                <input type="file" name="file" id="file" class="form-control"></input>
                <br/>
                <label> File uploaded as: </label>
-               <label id="fileAttachment" class="" ng-model="messageForm.fileName"> NONE </label>
+               <label id="fileAttachment" class="text-danger" ng-model="messageForm.fileName">NONE</label>
                <br/>
-               <input type="submit" value="Upload" class="btn btn-primary" ng-disabled="$isUploading"></input>
+               <input id="btnUpload" type="submit" value="Upload" class="btn btn-primary" ng-disabled="$isUploading"></input>
+               <br/>
              </form>
 
-             <input id="import" type="button" value="Import" class="btn btn-primary" ng-click="sendCtrl.importContacts()"></input>
+             <br/>
+
+             <input id="import" name="import" type="button" value="Import" class="btn btn-secondary" ng-click="sendCtrl.importContacts()" disabled="true"></input>
+          </div>
+
+          <div id="status" class="jumbotron">
+            <p id="statusMessages" ng-model="statusMessages"> Upload the file to import...</p>
           </div>
 
         </div>
       </div>
+
       {% else %}
 
       <div id="status" class="jumbotron">

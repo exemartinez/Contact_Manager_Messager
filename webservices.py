@@ -119,14 +119,14 @@ def upload_file():
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename)) #TODO: Have to change the filename for unique name, so different users can upload files.
             except Exception as e:
                 log.error("Internal Error:" + str(e))
-                return jsonify({'resultado': 'Error trying to upload the file to the server.'}), 500
+                return jsonify({'resultado': 'Error trying to upload the file to the server.','code':500}), 500
 
             log.info("File uploaded successfully!")
 
-            return jsonify({'resultado': str(url_for('uploaded_file', filename=filename))}), 200
+            return jsonify({'resultado': str(url_for('uploaded_file', filename=filename)),'code':200}), 200
             #return redirect(url_for('uploaded_file',filename=filename)) #use this in case you want to show the file.
 
-    return jsonify({'resultado': 'Wrong form method or signature.'}), 500
+    return jsonify({'resultado': 'Wrong form method or signature.','code':500}), 500
 
 @app.route('/api/v1.0/mailing/send', methods=['POST'])
 def send_mail_to_contacts():
