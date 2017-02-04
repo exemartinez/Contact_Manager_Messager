@@ -150,10 +150,11 @@ def send_mail_to_contacts():
     remitente=session['user']
     destinatarios = request.json['selectedItems'] #it comes as a list and is inmediatly transformed: access it by "destinatarios[x]"
     asunto = request.json['subject']
+    attachment = request.json['fileName']
 
     log.info("The subject received was:" + request.json['subject'])
 
-    resultado = mailctrl.send_Massive_Mails_to_Contacts(username, passw, mensaje,remitente, destinatarios, asunto, session['server'])
+    resultado = mailctrl.send_Massive_Mails_to_Contacts(username, passw, mensaje,remitente, destinatarios, asunto, session['server'], attachment)
 
     if(resultado==0):
         return jsonify({'resultado': resultado}), 200

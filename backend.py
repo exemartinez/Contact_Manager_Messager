@@ -1,3 +1,7 @@
+from email.mime.application import MIMEApplication
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
 import sys
 import logging
 import locale
@@ -137,20 +141,43 @@ class MailingManager:
 
         return result
 
-    def sendMail(self, mensaje, remitente, destinatario, asunto):
+    def sendMail(self, mensaje, remitente, destinatario, asunto, attachment):
         '''Sends a mail to a given account.'''
         #Message basic and standard template.
-        msg = "\r\n".join([
+
+        msg = MIMEMultipart()
+
+        """msg = "\r\n".join([
           "From: " + remitente,
           "To: " + destinatario,
           "Subject: " + asunto,
           "",
           mensaje
-          ])
+          ])"""
+
+        msg['From'] = remitente
+        msg['To'] = destinatario
+        msg['Subject'] = asunto
+
+        #defining and adding the attachement
+        msg.attach(MIMEText(mensaje, 'plain'))
+
+        if attachment.find('doc') > 0:
+        	attachFile = MIMEBase('application', 'msword')
+        elif attachment.find('pdf') > 0:
+        	attachFile = MIMEBase('application', 'pdf')
+        else:
+        	attachFile = MIMEBase('application', 'octet-stream')
+
+        attachFile.set_payload(file("." + attachment).read())
+        #Encoders.encode_base64(attachFile)
+        attachFile.add_header('Content-Disposition', 'attachment', filename=attachment)
+
+        msg.attach(attachFile)
 
         try:
 
-            self.server.sendmail(remitente, destinatario, msg)
+            self.server.sendmail(remitente, destinatario, msg.as_string())
 
             self.log.info( "Correo enviado a " + destinatario + ".")
 
@@ -452,7 +479,7 @@ class MessagingController():
     log = LogMngr("messaging_controller")
     mail = MailingManager()
 
-    def send_Massive_Mails_to_Contacts(self, username, passw, mensaje, remitente, destinatarios, asunto, server):
+    def send_Massive_Mails_to_Contacts(self, username, passw, mensaje, remitente, destinatarios, asunto, server, attachment):
         '''receives a set of mail addresses and sends the same mail to everyones of them individually'''
 
         try:
@@ -465,7 +492,7 @@ class MessagingController():
             for destinatario in destinatarios:
                 try:
                     self.log.info("Sending the mail for " + str(destinatario))
-                    self.mail.sendMail(mensaje, remitente, destinatario, asunto)
+                    self.mail.sendMail(mensaje, remitente, destinatario, asunto,attachment)
 
                 except Exception as e:
                     self.log.error("error for :" + str(destinatario) + " error: " + str(e))
