@@ -54,14 +54,19 @@
 
         <br/>
 
-        <input id="Login" type="button" value="Login" class="btn btn-primary" ng-click="loginCtrl.login()"></input>
+        <input name="login" id="login" type="button" value="Login" class="btn btn-primary" ng-click="loginCtrl.login()"></input>
+        <input name="logoff" id="logoff" type="button" value="Log - off" class="btn btn-default" ng-click="loginCtrl.logOff()"></input>
 
       </form>
 
     </div>
 
     <div id="status" class="jumbotron">
-      <p id="statusMessages"></p>
+      {% if 'user' in session %}
+        <p id="statusMessages">{{session('user')}}</p>
+      {% else %}
+        <p id="statusMessages"></p>
+      {% endif %}
     </div>
 
   </div>

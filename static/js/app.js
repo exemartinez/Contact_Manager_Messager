@@ -10,14 +10,22 @@ CMMessagerApp.controller('loginController', ['$scope','$window','CMMessagerAPIDe
 
   this.server = "smtp.gmail.com:587";
 
-  //Uploads a file throught the use of a web service REST.
+  //Logs the user in and sets the due session variables.
   this.login = function login() {
 
     console.log("Login in user: " + this.userName);
 
     //tries to log a user onto his mailing service.
 
-    CMMessagerAPIDelegate.loginMail(this.userName, this.passWord, this.server);
+    result = CMMessagerAPIDelegate.loginMail(this.userName, this.passWord, this.server);
+
+  };
+
+  //Uploads a file throught the use of a web service REST.
+  this.logOff = function logOff() {
+
+    console.log("Login off any user");
+    window.location.replace('/logoff');
 
   };
 
@@ -377,8 +385,9 @@ CMMessagerApp.factory("CMMessagerAPIDelegate", ["$q","$http", "$httpParamSeriali
   CMMessagerAPIDelegate.loginMail = function loginMail(user, pass, server){
 
     console.log("...calling the web service...");
+    msg="";
 
-    $http({
+    return $http({
         method: 'POST',
         url: 'http://localhost:5000/api/v1.0/mailing/login_try',
         //withCredentials: false,
@@ -398,8 +407,13 @@ CMMessagerApp.factory("CMMessagerAPIDelegate", ["$q","$http", "$httpParamSeriali
     .then(
     function successCallback(response) {
        //Logins into the user's mailing system.
+        msg= "Logged in with success!" + response.data;
+        console.log(msg);
 
-        console.log("Logged in with success!" + response.data);
+        $('#statusMessages').html(msg);
+        $('#login').prop('disabled', true);
+
+        return true;
 
     },
     function errorCallback(response) {
@@ -416,6 +430,11 @@ CMMessagerApp.factory("CMMessagerAPIDelegate", ["$q","$http", "$httpParamSeriali
               response.config;
 
         console.log(msg);
+
+        $('#statusMessages').html(msg);
+        $('#login').prop('disabled', false);
+
+        return false;
     });
 
 
