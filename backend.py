@@ -74,7 +74,7 @@ class ImportController():
     This class imports contacts into the SQLite database; it manages different data structures.
     '''
 
-    def import_Linkedin_Csv_Contacts(self,dataFile):
+    def import_Linkedin_Csv_Contacts(self,dataFile, userName):
         '''Just loads the database with the CSV data obtained from linkedin. It serves their data structure.'''
 
         log = LogMngr("Importer.import_linkedin_csv_contacts")
@@ -86,7 +86,7 @@ class ImportController():
             csvMng = CSVManager()
 
             #iterates over the list of contacts and instroduces it into the database.
-            dao.open_connection()
+            dao.open_connection(userName)
 
             log.info("Database connection online.")
             contactos = csvMng.getContactos(str(dataFile))
@@ -340,14 +340,24 @@ class DAO (object):
 
         return self.cursor.fetchall()
 
-    def open_connection(self):
+    def textualizeMail(self, email):
+        '''Replaces all the special characters for any operation system to deal with the database fiel name eagerly'''
+
+        mailtxt = str(email)
+
+        mailtxt=mailtxt.replace("@","_AT_")
+        mailtxt=mailtxt.replace(".","_DOT_")
+
+        return mailtxt
+
+    def open_connection(self, userName):
         '''
         Sets the due connections to the data stores.
         '''
 
         self.log.debug("Initiating database")
         # Initializes the connection to SQLite (and creates the due tables)
-        self.connection = sqlite.connect('./contactos.db')
+        self.connection = sqlite.connect('./contactos_' + self.textualizeMail(userName) + '.db')
         self.connection.text_factory = str
 
         self.cursor = self.connection.cursor()
@@ -399,7 +409,7 @@ class ContactosController():
         return json.dumps(lst)
 
 
-    def getContactosAll(self):
+    def getContactosAll(self, userName):
         '''Returns all contactos in database as a JSON'''
 
         dao = DAO()
@@ -407,7 +417,7 @@ class ContactosController():
 
         self.log.info("Openning connections to the database for querying. ")
 
-        dao.open_connection()
+        dao.open_connection(userName)
         results = dao.exec_get_all_contactos()
 
         self.log.info("Data retrieved. Records: "+str(len(results)))
@@ -530,7 +540,7 @@ if __name__ == "__main__":
         csvMng = CSVManager()
 
         #iterates over the list of contacts and instroduces it into the database.
-        dao.open_connection()
+        dao.open_connection("")
 
         log.info("Database connection online.")
         contactos = csvMng.getContactos(str(sys.argv[1]))

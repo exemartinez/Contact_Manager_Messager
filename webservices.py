@@ -1,4 +1,5 @@
-from flask import Flask, render_template, jsonify, request, json, redirect, url_for, send_from_directory, session
+from flask import Flask, render_template, jsonify, request, json, redirect, url_for, send_from_directory, session, app
+from datetime import timedelta
 import os
 from werkzeug.utils import secure_filename
 from backend import ImportController, ContactosController, MessagingController, LogMngr, MailingManager
@@ -13,6 +14,12 @@ app.secret_key = '003-Gr4c10s0+50s$Gar0f4!' #special key for coding the session 
 log = LogMngr("web services frontend")
 app.config['MAX_CONTENT_LENGTH'] = 64 * 1024 * 1024 #it allows to upload a file of up to 64mb.
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+@app.before_request
+def make_session_permanent():
+    '''Session timout configuration management.'''
+    session.permanent = True
+    app.permanent_session_lifetime = timedelta(minutes=20) #here we set the amount of minutes it will be available. This handles the whole user access, si is important.
 
 @app.route('/')
 @app.route('/home')
@@ -55,6 +62,7 @@ def message():
 @app.route('/api/v1.0/mailing/login_try', methods=['POST'])
 def login_mail():
     '''This logs into the mailing server and takes the credentials for further usage.'''
+
     log.info("Login into the mail service...")
 
     post = request.get_json()
@@ -97,6 +105,11 @@ def login_mail():
 @app.route('/api/v1.0/upload_controller', methods=['GET', 'POST'])
 def upload_file():
     '''Manages the file after it is sent by a HTML input for uploading.'''
+
+    if 'user' not in session:
+        log.info("User not logged in.")
+        return jsonify({'resultado': 'User not logged in.'}), 401
+
     log.info("Uploading the posted file...")
 
     if request.method == 'POST':
@@ -132,18 +145,14 @@ def upload_file():
 def send_mail_to_contacts():
     '''Returns all the database contacts.'''
 
-    #TODO: Have to TEST this method ASAP.
+    if 'user' not in session:
+        log.info("User not logged in.")
+        return jsonify({'resultado': 'User not logged in.'}), 401
+
     mailctrl = MessagingController()
     log.info("Params: " + str(request.json))
 
-    #TODO: This has to be reennacted as soon as I implement login for the mailing service.
-    """
-    if not request.json or not 'username' in request.json:
-        return jsonify({'resultado': 'Bad parameters or JSON structure'}), 400
-    """
-
     #parsing post parameters
-
     username=session['user']
     passw=session['password']
     mensaje = request.json['message']
@@ -164,25 +173,34 @@ def send_mail_to_contacts():
 @app.route('/api/v1.0/contactos/all', methods=['GET'])
 def get_all_contacts():
     '''Returns all the database contacts.'''
+
+    if 'user' not in session:
+        log.info("User not logged in.")
+        return jsonify({'resultado': 'User not logged in.'}), 401
+
     #TODO: Have to TEST this method ASAP.
     contactosctrl = ContactosController()
 
-    contactosctrl.getContactosAll()
+    contactosctrl.getContactosAll(session['user'])
     resultado = contactosctrl.getJSONContactosSet()
 
     log.info(resultado);
 
     return resultado, 200
 
-
 @app.route('/api/v1.0/contactos/load/linkedin', methods=['GET', 'POST'])
 def post_load_linkedin_contacts():
-    #TODO: Has to wrte the tests.
+    '''Imports the users into the database from a previously uploaded datafile.'''
+
+    if 'user' not in session:
+        log.info("User not logged in.")
+        return jsonify({'resultado': 'User not logged in.'}), 401
+
     '''Loads a all the database contacts.'''
     imp = ImportController()
 
     log.info("Importing file " + request.json['fileName'] + " into the database.");
-    res = imp.import_Linkedin_Csv_Contacts(str("." + request.json['fileName']))
+    res = imp.import_Linkedin_Csv_Contacts(str("." + request.json['fileName']), session['user'])
 
     if (res):
         return jsonify({'resultado': res}), 200

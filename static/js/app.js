@@ -112,8 +112,33 @@ CMMessagerApp.controller('SendController', ['$scope','$window','CMMessagerAPIDel
 
       console.log($scope.messageForm);
 
-      //adding the file to form data TODO refactor this, to make it compatible with older browsers.
-      CMMessagerAPIDelegate.sendMessage($scope.messageForm);
+      $('#send').attr('class', 'btn btn-secondary');
+      $('#send').prop('disabled', true);
+      $('#send').prop('value', '...');
+      $('#statusMessages').text("Sending the emails...wait for the return");
+
+      //uses a promise to deliver the proper values to the frontend
+      result = CMMessagerAPIDelegate.sendMessage($scope.messageForm)
+        .then(function(data) {
+
+            $('#send').attr('class', 'btn btn-primary');
+            $('#send').prop('disabled', false);
+            $('#send').prop('value', 'send');
+
+            $('#statusMessages').text("Emails sent.");
+            console.log("Mails sent to all the selected inboxes.");
+
+        }, function(err) {
+
+            $('#send').attr('class', 'btn btn-primary');
+            $('#send').prop('disabled', false);
+            $('#send').prop('value', 'send');
+
+            console.log("Several errors has ocurred. Emails partially sent. Check your mailing outbox.");
+
+        });
+
+        return result;
 
     };
 
@@ -244,7 +269,7 @@ CMMessagerApp.factory("CMMessagerAPIDelegate", ["$q","$http", "$httpParamSeriali
 
     result = $http({
         method: 'GET',
-        url: 'http://localhost:5000/api/v1.0/contactos/all',
+        url: '/api/v1.0/contactos/all',
         withCredentials: false,
         contentType: false,
         data: $httpParamSerializer()
@@ -335,22 +360,13 @@ CMMessagerApp.factory("CMMessagerAPIDelegate", ["$q","$http", "$httpParamSeriali
 
     console.log("...calling the web service...");
 
-    $http({
+    result = $http({
         method: 'POST',
-        url: 'http://localhost:5000/api/v1.0/mailing/send',
-        //withCredentials: false,
-        //contentType: false,
-        //transformRequest: angular.identity,
+        url: '/api/v1.0/mailing/send',
         headers: {
-          //'Authorization': 'Basic ' + Base64.encode('admin:repasstea'),
-          //'Accept':'multipart/form-data',
-          //'Content-Type': undefined,
           'Content-Type': 'application/json',
-          //'Content-Type': 'application/x-www-form-urlencoded',
-          //'Content-Type': 'multipart/form-data',
         },
         data: messageData
-
     })
     .then(
     function successCallback(response) {
@@ -359,6 +375,8 @@ CMMessagerApp.factory("CMMessagerAPIDelegate", ["$q","$http", "$httpParamSeriali
         msg = "<strong> Mail and attachments successfully sent! </strong> <br>";
 
         console.log(msg);
+
+        return msg;
 
     },
     function errorCallback(response) {
@@ -375,9 +393,13 @@ CMMessagerApp.factory("CMMessagerAPIDelegate", ["$q","$http", "$httpParamSeriali
               "<br/> config: " +
               response.config;
 
+        $('#statusMessages').html(msg);
         console.log(msg);
+
+        return $q.reject(null);
     });
 
+    return result;
 
   };
 
@@ -389,7 +411,7 @@ CMMessagerApp.factory("CMMessagerAPIDelegate", ["$q","$http", "$httpParamSeriali
 
     return $http({
         method: 'POST',
-        url: 'http://localhost:5000/api/v1.0/mailing/login_try',
+        url: '/api/v1.0/mailing/login_try',
         //withCredentials: false,
         //contentType: false,
         //transformRequest: angular.identity,
@@ -407,7 +429,7 @@ CMMessagerApp.factory("CMMessagerAPIDelegate", ["$q","$http", "$httpParamSeriali
     .then(
     function successCallback(response) {
        //Logins into the user's mailing system.
-        msg= "Logged in with success!" + response.data;
+        msg= "Logged in with success!";
         console.log(msg);
 
         $('#statusMessages').html(msg);

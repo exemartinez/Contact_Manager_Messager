@@ -63,7 +63,7 @@
 
     <div id="status" class="jumbotron">
       {% if 'user' in session %}
-        <p id="statusMessages">{{session('user')}}</p>
+        <p id="statusMessages">Current user: <b>{{session['user']}}<b/></p>
       {% else %}
         <p id="statusMessages"></p>
       {% endif %}
