@@ -91,9 +91,12 @@ class ImportController():
             log.info("Database connection online.")
             contactos = csvMng.getContactos(str(dataFile))
 
+            log.info("Importing..." + str(contactos))
+
             #TODO: Classify the contact; analize its data and tag it or typify it.
             for conta in contactos:
                 #TODO: perform updates, when the record already exists.
+
                 result = dao.exec_new_single_contacto(conta) #inserts new data.
 
                 if (result == dao.SQLITE_CONSTRAINT_UNIQUE):
@@ -213,6 +216,8 @@ class CSVManager():
     def getContactos(self, file_name):
 
         contactos = set()
+
+        self.logger.info("Using contacts")
 
         with open(file_name , 'rU') as f:
             reader = csv.reader(f)

@@ -6,6 +6,12 @@
 *.exe
 *.o
 *.so
+*.pyc
+*.pyo
+*.pyd
+/__pycache__/
+/homebrew/
+/.idea/
 /uploads/*.*
 
 # Packages #
@@ -20,7 +26,6 @@
 *.rar
 *.tar
 *.zip
-*.pyc
 
 # Logs and databases #
 ######################
@@ -29,6 +34,11 @@
 *.sqlite
 *.db
 *.csv
+*.pdf
+
+# Keep committed mock data fixtures
+!fixtures/
+!fixtures/*.csv
 
 # OS generated files #
 ######################
